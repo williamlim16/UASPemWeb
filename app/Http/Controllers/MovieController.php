@@ -29,21 +29,6 @@ class MovieController extends Controller
         return view('movie.show', ['movie' => $movie]);
     }
 
-
-    // public function store()
-    // {
-    //     $movie = new Movie();
-    //     $movie->title  = request('title');
-    //     $movie->director  = request('director');
-    //     $movie->sypnosis  = request('sypnosis');
-    //     $movie->duration_min  = request('duration');
-    //     $movie->age  = request('age');
-
-    //     $movie->save();
-
-    //     return redirect('/');
-    // }
-
     public function store(Request $request)
     {
         $movie = new Movie();

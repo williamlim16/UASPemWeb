@@ -20,12 +20,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::get('/movie', 'MovieController@index');
-// Route::get('/movie/create', 'MovieController@create');
-// Route::post('/movie', 'MovieController@store');
-// Route::get('/movie/{id}/edit', 'MovieController@edit');
-// Route::get('/movie/{id}', 'MovieController@show');
-// Route::patch('/movie/{id}', 'MovieController@update');
-// Route::delete('/movie/{id}', 'MovieController@destroy');
-
 Route::resource('movie', 'MovieController');
