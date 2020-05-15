@@ -22,6 +22,7 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
+
     </div>
     <div class="container mt-5">
         <h3><strong>Popular movies</strong></h3>
