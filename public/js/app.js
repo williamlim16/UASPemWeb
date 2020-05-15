@@ -49933,15 +49933,27 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/movie-card.scss":
+/*!****************************************!*\
+  !*** ./resources/sass/movie-card.scss ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!**********************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/movie-card.scss ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Laravel\UAS\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Laravel\UAS\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Michael\Documents\uaspemweb\UASPemweb\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\Michael\Documents\uaspemweb\UASPemweb\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\Michael\Documents\uaspemweb\UASPemweb\resources\sass\movie-card.scss */"./resources/sass/movie-card.scss");
 
 
 /***/ })

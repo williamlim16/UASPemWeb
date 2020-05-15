@@ -8,7 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
+    <title>Bioscoop</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -20,7 +21,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/movie-card.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
     <link href="{{ asset('css/carousel.css') }}" rel="stylesheet">
+    <link rel = "icon" href ="/img/film-roll.png"type = "image/x-icon">
+
 </head>
 
 <body>
@@ -28,7 +33,8 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{-- {{ config('app.name', 'Laravel') }} --}}
+                   <img src="/img/film-roll.png" alt="logo" style="width: 30px"> Bioscoop
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -79,6 +85,46 @@
             @yield('content')
         </main>
     </div>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">
+                yeet
+            </p>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Categories</h6>
+            <ul class="footer-links">
+              <li><a href="/home">Now Showing</a></li>
+              <li><a href="/home">Upcoming</a></li>
+            </ul>
+          </div>
+          <div class="col-xs-6 col-md-3">
+            <h6>Our Team:</h6>
+            <ul class="footer-links">
+              <li><a href="/home">Alfeto</a></li>
+              <li><a href="/home">William</a></li>
+              <li><a href="/home">Michael</a></li>
+              <li><a href="/home">Ryukin Aranta Lika</a></li>
+            </ul>
+          </div>
+
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by Bioscoop.
+            </p>
+          </div>
+        </div>
+      </div>
+</footer>
 </body>
 
 </html>
