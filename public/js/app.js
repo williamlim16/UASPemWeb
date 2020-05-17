@@ -91860,7 +91860,7 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/esm/index.js");
+/* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/esm/index.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -91871,7 +91871,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-Vue.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
+Vue.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -92020,6 +92020,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/details.scss":
+/*!*************************************!*\
+  !*** ./resources/sass/details.scss ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/movie-card.scss":
 /*!****************************************!*\
   !*** ./resources/sass/movie-card.scss ***!
@@ -92032,15 +92043,16 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 0:
-/*!**********************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/movie-card.scss ***!
-  \**********************************************************************************************/
+/*!****************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/movie-card.scss ./resources/sass/details.scss ***!
+  \****************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! C:\Users\Michael\Documents\uaspemweb\UASPemweb\resources\js\app.js */"./resources/js/app.js");
 __webpack_require__(/*! C:\Users\Michael\Documents\uaspemweb\UASPemweb\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\Michael\Documents\uaspemweb\UASPemweb\resources\sass\movie-card.scss */"./resources/sass/movie-card.scss");
+__webpack_require__(/*! C:\Users\Michael\Documents\uaspemweb\UASPemweb\resources\sass\movie-card.scss */"./resources/sass/movie-card.scss");
+module.exports = __webpack_require__(/*! C:\Users\Michael\Documents\uaspemweb\UASPemweb\resources\sass\details.scss */"./resources/sass/details.scss");
 
 
 /***/ })
