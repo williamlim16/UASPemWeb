@@ -3,6 +3,7 @@
 @section('content')
 
 <body>
-    <example-component></example-component>
+    <!-- {{ json_encode($seats)}} -->
+    <example-component :seats="{{ json_encode($seats) }}"></example-component>
 </body>
 @endsection
