@@ -23,7 +23,6 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
-
     </div>
     </div>
 
@@ -32,6 +31,7 @@
 
         <div class="row">
             @foreach($movies as $movie)
+        <a href="/movie/{{ $movie->id }}">
             <div class="col-4">
                     <div class="movie">
                         <div class="menu"><i class="material-icons"></i></div>
@@ -61,8 +61,8 @@
                         </div>
                     </div>
             </div>
+            </a>
             @endforeach
-
         </div>
     </div>
 
