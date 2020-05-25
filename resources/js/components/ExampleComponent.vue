@@ -34,6 +34,7 @@
                     :class="buttonClasses(seat)"
                     :key="index"
                     @click="updateProduct(seat.id)"
+                    :disabled="!seat.available"
                 >
                     {{ seat.id }} - {{ seat.row }}
                 </button>
@@ -81,7 +82,6 @@
             async ConfirmReserve() {
                 this.$set(this.send, "seat", this.selectedVariant);
                 this.$set(this.send, "screeningid", this.screeningid);
-                this.send = JSON.stringify({data: this.send});
                 console.log(this.send);
                 await axios.post(
                     `/api/reserve/${this.screeningid}/store`,

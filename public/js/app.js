@@ -1978,6 +1978,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["seats", "screeningid"],
   data: function data() {
@@ -2019,11 +2020,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.$set(_this.send, "screeningid", _this.screeningid);
 
-                _this.send = JSON.stringify({
-                  data: _this.send
-                });
                 console.log(_this.send);
-                _context.next = 6;
+                _context.next = 5;
                 return axios.post("/api/reserve/".concat(_this.screeningid, "/store"), {
                   data: _this.send
                 }).then(function (res) {
@@ -2032,7 +2030,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   console.log(err);
                 });
 
-              case 6:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -81004,6 +81002,7 @@ var render = function() {
                     key: index,
                     staticClass: "btn m-2",
                     class: _vm.buttonClasses(seat),
+                    attrs: { disabled: !seat.available },
                     on: {
                       click: function($event) {
                         return _vm.updateProduct(seat.id)
@@ -93452,10 +93451,10 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Laravel\UAS\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\Laravel\UAS\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! D:\Laravel\UAS\resources\sass\movie-card.scss */"./resources/sass/movie-card.scss");
-module.exports = __webpack_require__(/*! D:\Laravel\UAS\resources\sass\details.scss */"./resources/sass/details.scss");
+__webpack_require__(/*! A:\Tugas\UAS\PemWeb\uas\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! A:\Tugas\UAS\PemWeb\uas\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! A:\Tugas\UAS\PemWeb\uas\resources\sass\movie-card.scss */"./resources/sass/movie-card.scss");
+module.exports = __webpack_require__(/*! A:\Tugas\UAS\PemWeb\uas\resources\sass\details.scss */"./resources/sass/details.scss");
 
 
 /***/ })
