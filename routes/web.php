@@ -9,4 +9,3 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('movie', 'MovieController');
-Route::get('/reserve/{sid}', 'ReserveController@index');
