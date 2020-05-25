@@ -15,3 +15,6 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/movie-card.scss', 'public/css')
     .sass('resources/sass/details.scss', 'public/css');
+
+
+    mix.browserSync('127.0.0.1:8000');

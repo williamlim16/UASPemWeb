@@ -1,7 +1,7 @@
 <template>
     <div class="container ">
         <div class="row">
-            <h1>Choose your seat</h1>
+            <h1>Choose your seats</h1>
         </div>
         <div class="row">
             <div class="col m-5">
@@ -15,11 +15,8 @@
         <div class="row justify-content-md-center">
             <template v-for="(seat, index) in seats">
                 <button
-                    v-if="index < 10 && seat.row === 'A'"
-                    class="btn m-2 "
-                    :class="buttonClasses(seat)"
-                    :key="index"
-                    @click="updateProduct(seat.id)"
+                    v-if="index < 10 && seat.row === 'A'" class="btn m-2 " 
+                    :class="buttonClasses(seat)" :key="index" @click="updateProduct(seat.id)"
                     :disabled="!seat.available"
                 >
                     {{ seat.id }} - {{ seat.row }}
@@ -34,6 +31,7 @@
                     :class="buttonClasses(seat)"
                     :key="index"
                     @click="updateProduct(seat.id)"
+                    :disabled="!seat.available"
                 >
                     {{ seat.id }} - {{ seat.row }}
                 </button>
@@ -81,7 +79,7 @@
             async ConfirmReserve() {
                 this.$set(this.send, "seat", this.selectedVariant);
                 this.$set(this.send, "screeningid", this.screeningid);
-                this.send = JSON.stringify({data: this.send});
+                // this.send = JSON.stringify({data: this.send});
                 console.log(this.send);
                 await axios.post(
                     `/api/reserve/${this.screeningid}/store`,
@@ -90,7 +88,12 @@
                     console.log(res);
                 }).catch(err => {
                     console.log(err);
+                }).finally(res=>{
+                    window.location.href=`/api/reserve/${this.screeningid}/success`;
+
                 })
+
+
             }
         }
     };

@@ -16,7 +16,7 @@ class ReserveController extends Controller
     // }
     public function index($screeningid)
     {
-        $query = "SELECT sr.seat_id FROM `seat_reserved` sr, `seat` s WHERE s.id = sr.seat_id";
+        $query = "SELECT res.seat_id FROM `reservation` res, `seat` s WHERE s.id = res.seat_id";
         $audi = DB::table('screening')->where('id', $screeningid)->value('auditorium_id');
         $seats_d = DB::table('seat')->where('auditorium_id', $audi)->get();
         $seats = [];
@@ -47,5 +47,9 @@ class ReserveController extends Controller
         }
 //        DB::table('reservation')->insert(['screening_id' => $screening_id, 'seat_id' => $data, 'user_id' => $uid]);
         return response(null, Response::HTTP_OK);
+    }
+    public function success($screening_id)
+    {
+        return view('reserve.success', ['screeningid'=>$screening_id]);
     }
 }
