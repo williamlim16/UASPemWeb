@@ -16,7 +16,6 @@ class ReserveController extends Controller
     // }
     public function index($screeningid)
     {
-        $query = "SELECT res.seat_id FROM `reservation` res, `seat` s WHERE s.id = res.seat_id";
         $audi = DB::table('screening')->where('id', $screeningid)->value('auditorium_id');
         $seats_d = DB::table('seat')->where('auditorium_id', $audi)->get();
         $seats = [];
@@ -29,7 +28,7 @@ class ReserveController extends Controller
             array_push($seats, $result);
         }
         // var_dump($seats);
-        $reserved_seat_id = DB::select($query);
+        $reserved_seat_id = DB::table('reservation')->where('screening_id',$screeningid)->get('seat_id');
         for ($i = 0; $i < count($seats); $i++) {
             for ($j = 0; $j < count($reserved_seat_id); $j++)
                 if ($seats[$i]["id"] == $reserved_seat_id[$j]->seat_id)

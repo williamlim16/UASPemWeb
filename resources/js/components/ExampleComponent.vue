@@ -15,7 +15,7 @@
         <div class="row justify-content-md-center">
             <template v-for="(seat, index) in seats">
                 <button
-                    v-if="index < 10 && seat.row === 'A'" class="btn m-2 " 
+                    v-if="index < 10 && seat.row === 'A'" class="btn m-2 "
                     :class="buttonClasses(seat)" :key="index" @click="updateProduct(seat.id)"
                     :disabled="!seat.available"
                 >
@@ -88,9 +88,8 @@
                     console.log(res);
                 }).catch(err => {
                     console.log(err);
-                }).finally(res=>{
+                }).finally(()=>{
                     window.location.href=`/api/reserve/${this.screeningid}/success`;
-
                 })
 
 
