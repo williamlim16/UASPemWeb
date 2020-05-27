@@ -2026,7 +2026,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   console.log(res);
                 })["catch"](function (err) {
                   console.log(err);
-                })["finally"](function (res) {
+                })["finally"](function () {
                   window.location.href = "/api/reserve/".concat(_this.screeningid, "/success");
                 });
 
