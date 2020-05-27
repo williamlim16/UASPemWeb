@@ -61,8 +61,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="birthdate" class="col-md-4 col-form-label text-md-right">{{ __('Birth Date') }}</label>
+
                             <div class="col-md-6">
-                                <input type="date" name="birthdate">
+                                <input type="date" id="birthdate" name="birthdate"  class="form-control @error('birthdate') is-invalid @enderror" required autocomplete="bday">
+                                @error('birthdate')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 

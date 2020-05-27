@@ -8,11 +8,17 @@
 <div class="row movie_card" id="tomb">
     <div class="info_section">
         <div class="col-md-6 movie_header">
-            <img class="thumbnail" src="{{ $movie->PosterLink}}"/>
+            <img class="img-thumbnail" src="{{"/".$movie->posterpath}}"/>
             <h1>{{ $movie->title}} </h1>
             <h4>Director: {{ $movie->director}}</h4>
             <span class="minutes"> {{ $movie->duration_min}}</span>
-            <p class="type">{{$movie->categories}}</p>
+            <p class="type">
+                @foreach($movie->categories as $genre)
+                    @if($loop->index == 0){{$genre}}
+                    @else{{", ".$genre." "}}
+                    @endif
+                @endforeach
+            </p>
         </div>
 
         <div class="col-md-6 movie_desc">
@@ -35,7 +41,14 @@
                 <div class="col-md-9">
                     <h4>Cast</h4>
                     <div class="row mt-3">
-                        <div class="col-sm-3">
+                        @foreach($movie->casts as $actor)
+                            <div class="col-sm-3">
+                                <img src="/img/interstellar_cover.jpg" class="cast-icon">
+                                <p>{{$actor}}</p>
+                            </div>
+                        @endforeach
+
+                        {{-- <div class="col-sm-3">
                                 <img src="/img/interstellar_cover.jpg" class="cast-icon">
                                 <p>Christopher</p>
                         </div>
@@ -44,9 +57,10 @@
                                 <p>Anna</p>
                         </div>
                         <div class="col-sm-3">
-                                <img src="/img/captain_marvel_cover.jpg" class="cast-icon">
-                                <p>Guy</p>
+                            <img src="/img/captain_marvel_cover.jpg" class="cast-icon">
+                            <p>Guy</p>
                         </div>
+                         --}}
                     </div>
                 </div>
             </div>
@@ -74,16 +88,16 @@
         </div>
 
 
+        <a href="/home"><button class="btn btn-secondary">Go Back</button></a>
 
-
-        <form action="" method="POST">
+        {{-- <form action="" method="POST">
         @csrf
         @method('DELETE')
-        <input type="submit" name="delete-btn" id="submit" class="btn btn-danger" value="Delete">
-        </form>
+        <input type="submit" name="delete-btn" id="submit" class="btn btn-danger" value="Delete" >
+        </form> --}}
     </div>
-    {{-- <div class="blur_back" style="background-image: url('{{ $movie->PosterLink}}')"></div> --}}
-    <div class="blur_back" style="background-image: url('/img/inception_details.jpg')"></div>
+    <div class="blur_back" style="background-image: url('{{ "/".$movie->posterpath}}')"></div>
+    {{-- <div class="blur_back" style="background-image: url('/img/inception_details.jpg')"></div> --}}
 </div>
 
 
