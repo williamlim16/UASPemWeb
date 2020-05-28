@@ -98,7 +98,7 @@
             </div>
         </div>
     </div>
+    <div class="blur_back" style="background-image: url('/img/inception_details.jpg')"></div>
 {{-- <div class="blur_back" style="background-image: url('{{ $movie->thumbnail }}')"></div> --}}
-<div class="blur_back" style="background-image: url('/img/inception_details.jpg')"></div>
 </div>
 @endsection
