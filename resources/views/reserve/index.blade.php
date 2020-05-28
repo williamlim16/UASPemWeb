@@ -5,7 +5,7 @@
 <body>
     <div id="app">
         <!-- {{ json_encode($seats)}} -->
-        <example-component :seats="{{ json_encode($seats) }}" :screeningid="{{ $screeningid }}"></example-component>
+        <reserve-component :seats="{{ json_encode($seats) }}" :screeningid="{{ $screeningid }}"></reserve-component>
 
     </div>
 </body>

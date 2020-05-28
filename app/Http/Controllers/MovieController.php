@@ -33,8 +33,9 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         $movie = new Movie();
-        $in = $request->only(['title', 'director', 'sypnosis', 'duration_min', 'age']);
+        $in = $request->only(['title', 'director', 'sypnosis', 'time', 'age', 'categories', 'casts', 'posterpath']);
         $movie->insert($in);
+        $movie->save();
         return redirect('/');
     }
 

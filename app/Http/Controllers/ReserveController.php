@@ -7,13 +7,14 @@ use Illuminate\Http\Response;
 
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ReserveController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index($screeningid)
     {
         $audi = DB::table('screening')->where('id', $screeningid)->value('auditorium_id');
@@ -38,7 +39,7 @@ class ReserveController extends Controller
     }
     public function store(Request $req)
     {
-        $uid = 2;
+        $uid = Auth::id();
         $screening_id = $req->data['screeningid'];
         $data = $req->data['seat'];
         foreach ($data as $d) {
@@ -47,8 +48,15 @@ class ReserveController extends Controller
 //        DB::table('reservation')->insert(['screening_id' => $screening_id, 'seat_id' => $data, 'user_id' => $uid]);
         return response(null, Response::HTTP_OK);
     }
-    public function success($screening_id)
+    public function success($screening_id, $seatString)
     {
-        return view('reserve.success', ['screeningid'=>$screening_id]);
+        $seatString = str_replace('+', ', ', $seatString);
+        $username = Auth::user()->name;
+        $screeningData = DB::table('screening')
+                    ->join('auditorium', 'auditorium.id', '=', 'screening.auditorium_id')
+                    ->join('movie', 'movie.id', '=', 'screening.movie_id')
+                    ->select('auditorium.name',  'movie.title', 'movie.age', 'movie.time', 'movie.posterpath')->where('screening.id', $screening_id)
+                    ->get();
+        return view('reserve.success', ['screeningid'=>$screening_id, 'seats' => $seatString, 'name' => $username, 'data' => $screeningData[0]]);
     }
 }

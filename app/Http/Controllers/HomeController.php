@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Movie;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
+
+
 
 class HomeController extends Controller
 {
@@ -25,6 +30,7 @@ class HomeController extends Controller
     public function index()
     {
         $movies = Movie::all();
+
         return view('welcome', ['movies' => $movies]);
     }
 }

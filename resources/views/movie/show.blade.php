@@ -8,8 +8,19 @@
 <div class="row movie_card">
     <div class="info_section">
         <div class="col-md-6 movie_header">
-            <img class="thumbnail" src="{{ $movie->posterpath}}"/>
+
+            <img class="img-thumbnail" src="{{"/".$movie->posterpath}}"/>
             <h1>{{ $movie->title}} </h1>
+            <h4>Director: {{ $movie->director}}</h4>
+            <span class="minutes"> {{ $movie->duration_min}}</span>
+            <p class="type">
+                @foreach($movie->categories as $genre)
+                    @if($loop->index == 0){{$genre}}
+                    @else{{", ".$genre." "}}
+                    @endif
+                @endforeach
+            </p>
+        </div>
 
             <span class="minutes"> {{ $movie->time}}m</span>
 
@@ -45,6 +56,7 @@
                         <p>{{ $cast }}</p>
                         </div>
                         @endforeach
+
                     </div>
                 </div>
 
@@ -82,6 +94,7 @@
             </div>
         </div>
 
+        <a href="/home"><button class="btn btn-secondary">Go Back</button></a>
         <div class="row">
             <div class="col-md-2">
                 <form action="" method="POST">
@@ -100,5 +113,6 @@
     </div>
 {{-- <div class="blur_back" style="background-image: url('{{ $movie->thumbnail }}')"></div> --}}
 <div class="blur_back" style="background-image: url('/img/inception_details.jpg')"></div>
+
 </div>
 @endsection
