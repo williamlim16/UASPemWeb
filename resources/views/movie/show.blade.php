@@ -9,10 +9,9 @@
     <div class="info_section">
         <div class="col-md-6 movie_header">
 
-            <img class="img-thumbnail" src="{{"/".$movie->posterpath}}"/>
+            <img class="thumbnail" src="{{$movie->posterpath}}"/>
             <h1>{{ $movie->title}} </h1>
-            <h4>Director: {{ $movie->director}}</h4>
-            <span class="minutes"> {{ $movie->duration_min}}</span>
+            <span class="minutes"> {{ $movie->time}}m</span>
             <p class="type">
                 @foreach($movie->categories as $genre)
                     @if($loop->index == 0){{$genre}}
@@ -21,22 +20,11 @@
                 @endforeach
             </p>
         </div>
-
-            <span class="minutes"> {{ $movie->time}}m</span>
-
-            <p class="type">
-                @foreach ($movie->categories as $category)
-                {{ $loop->first ? '' : '/ ' }}
-                {{$category}}
-                @endforeach
-            </p>
-        </div>
-        <div class="movie_desc">
-            <p>
-                {{ $movie->sypnosis}}
-            </p>
-        </div>
-
+            <div class="movie_desc">
+                <p>
+                    {{ $movie->sypnosis}}
+                </p>
+             </div>
         <div class="col-md-6">
             <div class="row cast">
                 <div class="col-md-2">
@@ -113,7 +101,6 @@
     </div>
     <div class="blur_back" style="background-image: url('/img/inception_details.jpg')"></div>
 {{-- <div class="blur_back" style="background-image: url('{{ $movie->thumbnail }}')"></div> --}}
-<div class="blur_back" style="background-image: url('/img/inception_details.jpg')"></div>
 
 </div>
 @endsection
