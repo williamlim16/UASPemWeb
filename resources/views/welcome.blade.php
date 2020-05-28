@@ -6,21 +6,30 @@
 </head>
 <body>
     <div class="container">
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+
+    <div id="carousel" class="carousel slide" data-ride="carousel">
+
         <div class="carousel-inner">
-            <div class="carousel-item active">
+            @foreach($movies as $movie)
+            @if($loop->index==0)<div class="carousel-item active">
+            @else<div class="carousel-item">
+            @endif
+                <img src="{{$movie->posterpath}}" alt="{{Str::substr($movie->posterpath, 4)}}" class="d-block w-100">
+            </div>
+            @endforeach
+            {{-- <div class="carousel-item active">
                 <img class="d-block w-100" src="/img/IMG_1875.jpeg" alt="First slide">
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="/img/captainmarvel.jpg" alt="Second slide">
-            </div>
+            </div> --}}
 
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
@@ -51,23 +60,26 @@
         @foreach($movies as $movie)
         <a href="/movie/{{ $movie->id }}">
             <div class="col-4">
-                <div class="movie">
-                    <div class="menu"><i class="material-icons"></i></div>
-                <div class="movie-img" style="background-image: url('{{ $movie->posterpath }}');"></div>
-                    <div class="text-movie-cont">
-                        <div class="mr-grid">
-                            <div class="col1">
-                            <h1>{{ $movie->title }}</h1>
-                            <ul class="movie-gen">
-                                <li>PG- {{ $movie->age }}  /</li>
-                                <li> {{ date('H', strtotime($movie->duration_min)) }}h{{ date('i', strtotime($movie->duration_min)) }}m  /</li>
-                                <li>
-                                    @foreach ($movie->categories as $category)
-                                    {{ $loop->first ? '' : ', ' }}
-                                    {{$category}}
-                                    @endforeach
-                                </li>
-                            </ul>
+                    <div class="movie">
+                        <div class="menu"><i class="material-icons"></i></div>
+                    <div class="movie-img" style="background-image: url('{{ $movie->posterpath }}');"></div>
+                        <div class="text-movie-cont">
+                            <div class="mr-grid">
+                                <div class="col1">
+                                <h1>{{ $movie->title }}</h1>
+                                <ul class="movie-gen">
+                                    <li>PG- {{ $movie->age }}  /</li>
+                                    <li> {{ intval(($movie->time)/60) }}h{{ intval(($movie->time)%60) }}m  /</li>
+                                    <li>
+                                        @foreach($movie->categories as $genre)
+                                            @if($loop->index == 0){{$genre}}
+                                            @else{{", ".$genre." "}}
+                                            @endif
+                                        @endforeach
+                                    </li>
+                                </ul>
+                                </div>
+
                             </div>
                         </div>
                         <div class="mr-grid">
@@ -76,14 +88,16 @@
                             </div>
                         </div>
 
-                        <div class="mr-grid actors-row">
-                            <div class="col1">
-                            <p class="movie-actors">
-                                @foreach ($movie->casts as $cast)
-                                {{ $loop->first ? '' : ', ' }}
-                                {{$cast}}
-                                @endforeach
-                            </p>
+                            <div class="mr-grid actors-row">
+                                <div class="col1">
+                                <p class="movie-actors"> 
+                                    @foreach($movie->casts as $actor)
+                                        @if($loop->index == 0){{$actor}}
+                                        @else{{", ".$actor}}
+                                        @endif
+                                    @endforeach
+                                </p>
+                                </div>
                             </div>
                         </div>
                     </div>

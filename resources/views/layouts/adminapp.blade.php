@@ -13,8 +13,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -31,7 +30,7 @@
 
 <body id="bg_img">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{-- {{ config('app.name', 'Laravel') }} --}}
@@ -43,12 +42,8 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        @if(Auth::id() == 1)
-                        <a href="/admin"> 
-                          <button class="btn btn-secondary">Open Admin Dashboard</button>
-                        </a>
-                        @endif
+                    <ul class="navbar-nav mr-auto" style="color:white">
+                        <li>Administrative Tools</li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -94,44 +89,40 @@
     </div>
 
     <footer class="site-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12 col-md-6">
-            <h6>About</h6>
-            <p class="text-justify">
-                Project UAS Web Programming - Kelompok 3
-            </p>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <h6>About</h6>
+              <p class="text-justify">
+                  yeet
+              </p>
+            </div>
+  
+            <div class="col-xs-6 col-md-3">
+              
+            </div>
+            <div class="col-xs-6 col-md-3">
+              <h6>Members:</h6>
+              <ul class="footer-links">
+                <li><a href="/home">Alfeto</a></li>
+                <li><a href="/home">William</a></li>
+                <li><a href="/home">Michael</a></li>
+                <li><a href="/home">Ryukin Aranta Lika</a></li>
+              </ul>
+            </div>
+  
           </div>
-
-          <div class="col-xs-6 col-md-3">
-            <h6>Categories</h6>
-            <ul class="footer-links">
-              <li><a href="/home">Now Showing</a></li>
-              <li><a href="/home">Upcoming</a></li>
-            </ul>
-          </div>
-          <div class="col-xs-6 col-md-3">
-            <h6>Our Team:</h6>
-            <ul class="footer-links">
-              <li><a href="/home">Alfeto</a></li>
-              <li><a href="/home">William</a></li>
-              <li><a href="/home">Michael</a></li>
-              <li><a href="/home">Ryukin Aranta Lika</a></li>
-            </ul>
-          </div>
-
+          <hr>
         </div>
-        <hr>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 col-sm-6 col-xs-12">
-            <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by Bioscoop.
-            </p>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-12">
+              <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by Bioscoop.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-</footer>
+     </footer>
 </body>
 
 </html>
