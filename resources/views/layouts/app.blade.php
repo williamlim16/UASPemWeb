@@ -13,7 +13,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -98,7 +99,7 @@
           <div class="col-sm-12 col-md-6">
             <h6>About</h6>
             <p class="text-justify">
-                yeet
+                Project UAS Web Programming - Kelompok 3
             </p>
           </div>
 

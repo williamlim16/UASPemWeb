@@ -5,9 +5,10 @@
     <link href="{{ asset('css/details.css') }}" rel="stylesheet">
 </head>
 
-<div class="row movie_card" id="tomb">
+<div class="row movie_card">
     <div class="info_section">
         <div class="col-md-6 movie_header">
+
             <img class="img-thumbnail" src="{{"/".$movie->posterpath}}"/>
             <h1>{{ $movie->title}} </h1>
             <h4>Director: {{ $movie->director}}</h4>
@@ -21,53 +22,59 @@
             </p>
         </div>
 
-        <div class="col-md-6 movie_desc">
-            <p class="text">
-            {{ $movie->sypnosis}}
+            <span class="minutes"> {{ $movie->time}}m</span>
+
+            <p class="type">
+                @foreach ($movie->categories as $category)
+                {{ $loop->first ? '' : '/ ' }}
+                {{$category}}
+                @endforeach
+            </p>
+        </div>
+        <div class="movie_desc">
+            <p>
+                {{ $movie->sypnosis}}
             </p>
         </div>
 
-        <div class="col-md-6 mt-5 cast">
-
-            <div class="row">
-                <div class="col-md-3">
+        <div class="col-md-6">
+            <div class="row cast">
+                <div class="col-md-2">
                     <h4>Director</h4>
-                    <div class="col-sm-3 mt-3">
+                    <div class="mt-3">
                         <img src="/img/interstellar_cover.jpg" class="cast-icon">
-                    <p>{{ $movie->director }}</p>
+                        <p>{{ $movie->director }}</p>
                     </div>
                 </div>
 
-                <div class="col-md-9">
+                <div class="col-md-3">
                     <h4>Cast</h4>
                     <div class="row mt-3">
-                        @foreach($movie->casts as $actor)
-                            <div class="col-sm-3">
-                                <img src="/img/interstellar_cover.jpg" class="cast-icon">
-                                <p>{{$actor}}</p>
-                            </div>
+                        @foreach ($movie->casts as $cast)
+                        <div class="col-sm-6">
+                            <img src="/img/interstellar_cover.jpg" class="cast-icon">
+                        <p>{{ $cast }}</p>
+                        </div>
                         @endforeach
 
-                        {{-- <div class="col-sm-3">
-                                <img src="/img/interstellar_cover.jpg" class="cast-icon">
-                                <p>Christopher</p>
-                        </div>
-                        <div class="col-sm-3">
-                                <img src="/img/inception_cover.jpg" class="cast-icon">
-                                <p>Anna</p>
-                        </div>
-                        <div class="col-sm-3">
-                            <img src="/img/captain_marvel_cover.jpg" class="cast-icon">
-                            <p>Guy</p>
-                        </div>
-                         --}}
                     </div>
                 </div>
-            </div>
 
+                <div class="col-md-7"></div>
+            </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="mt-3">
+            <h4>Watch Trailer</h4> <br>
+                <iframe width="560" height="315"
+                {{-- src="{{ $movie->youtubelink }}" --}}
+                src="https://www.youtube.com/embed/fTRnWXXDcL4"
+                frameborder="0" allow="accelerometer; autoplay;
+                encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="col-md-6 mt-3">
             <h4>Pick your time</h4>
             <div class="row">
                 <div class="col-sm-3">
@@ -87,22 +94,25 @@
             </div>
         </div>
 
-
         <a href="/home"><button class="btn btn-secondary">Go Back</button></a>
-
-        {{-- <form action="" method="POST">
-        @csrf
-        @method('DELETE')
-        <input type="submit" name="delete-btn" id="submit" class="btn btn-danger" value="Delete" >
-        </form> --}}
+        <div class="row">
+            <div class="col-md-2">
+                <form action="" method="POST">
+                @csrf
+                <input type="submit" name="reserve-btn" id="submit" class="btn-lg btn-primary" value="Reserve">
+                </form>
+            </div>
+            <div class="col-md-2">
+                <form action="" method="POST">
+                @csrf
+                @method('DELETE')
+                <input type="submit" name="delete-btn" id="submit" class="btn-lg btn-danger" value="Delete">
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="blur_back" style="background-image: url('{{ "/".$movie->posterpath}}')"></div>
-    {{-- <div class="blur_back" style="background-image: url('/img/inception_details.jpg')"></div> --}}
+{{-- <div class="blur_back" style="background-image: url('{{ $movie->thumbnail }}')"></div> --}}
+<div class="blur_back" style="background-image: url('/img/inception_details.jpg')"></div>
+
 </div>
-
-
-
-
-
-
 @endsection

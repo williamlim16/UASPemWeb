@@ -1,11 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-
+<head>
+    <link href="{{ asset('css/search.css') }}" rel="stylesheet">
+</head>
 <body>
     <div class="container">
 
     <div id="carousel" class="carousel slide" data-ride="carousel">
+
         <div class="carousel-inner">
             @foreach($movies as $movie)
             @if($loop->index==0)<div class="carousel-item active">
@@ -33,11 +36,28 @@
     </div>
     </div>
 
+    {{-- Search --}}
+    <div class="container mt-5">
+        <h3><strong>Looking for something to watch?</strong></h3>
+        <div class="row search">
+            <div class="col-md-9">
+                <input type="text" name="search" id="search" maxlength= "30" placeholder="e.g. Interstellar" class="search-bar">
+            </div>
+            <div class="col-md-3">
+                {{-- not finished --}}
+            <form action="" method="POST">
+                    <button class="btn-lg btn-secondary search-button">Search</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    {{-- Search --}}
+
     <div class="container mt-5">
         <h3><strong>Now Showing</strong></h3>
-
         <div class="row">
-            @foreach($movies as $movie)
+        @foreach($movies as $movie)
         <a href="/movie/{{ $movie->id }}">
             <div class="col-4">
                     <div class="movie">
@@ -59,12 +79,14 @@
                                     </li>
                                 </ul>
                                 </div>
+
                             </div>
-                            <div class="mr-grid">
-                                <div class="col1">
-                                <p class="movie-description">{{ $movie->sypnosis }}</p>
-                                </div>
+                        </div>
+                        <div class="mr-grid">
+                            <div class="col1">
+                            <p class="movie-description">{{ $movie->sypnosis }}</p>
                             </div>
+                        </div>
 
                             <div class="mr-grid actors-row">
                                 <div class="col1">
@@ -79,12 +101,11 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
-            </a>
-            @endforeach
+        </a>
+        @endforeach
         </div>
     </div>
-
-
 </body>
 @endsection

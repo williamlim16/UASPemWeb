@@ -70,11 +70,9 @@ body {
 }
 
 .movie_card .info_section .movie_desc {
-  padding: 25px;
-}
-
-.movie_card .info_section .movie_desc .text {
+  padding-bottom: 80px;
   color: white;
+  word-wrap: break-word;
 }
 
 .movie_card .info_section .movie_social {
@@ -149,7 +147,7 @@ body {
   }
 
   .movie_desc {
-    width: 100%;
+    width: 50%;
   }
 
   .info_section {

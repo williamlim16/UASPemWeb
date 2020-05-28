@@ -14,7 +14,8 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/movie-card.scss', 'public/css')
-    .sass('resources/sass/details.scss', 'public/css');
+    .sass('resources/sass/details.scss', 'public/css')
+    .sass('resources/sass/search.scss', 'public/css');
 
 
-    mix.browserSync('127.0.0.1:8000');
+mix.browserSync('127.0.0.1:8000');
