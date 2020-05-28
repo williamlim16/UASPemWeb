@@ -106,7 +106,6 @@ body {
   top: 0;
   z-index: 1;
   height: 100%;
-  width:100%;
   right: 0;
   background-size: cover;
   border-radius: 11px;
@@ -154,7 +153,7 @@ body {
   }
 
   .info_section {
-    background: linear-gradient(to top, black 50%, transparent 100%);
+    background: linear-gradient(to top, white 50%, transparent 100%);
     display: inline-grid;
   }
 }

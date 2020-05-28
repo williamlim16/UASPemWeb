@@ -48,7 +48,7 @@
 
 <script>
     export default {
-        props: ["seats", "screeningid"],
+        props: ["seats", "screeningid", "userid"],
         data() {
             return {
                 selectedVariant: [],
@@ -80,16 +80,19 @@
                 this.$set(this.send, "seat", this.selectedVariant);
                 this.$set(this.send, "screeningid", this.screeningid);
                 // this.send = JSON.stringify({data: this.send});
-                console.log(this.send);
+                // console.log(this.send);
+                
+                
                 await axios.post(
-                    `/api/reserve/${this.screeningid}/store`,
+                    `/reserve/${this.screeningid}/store`,
                     { data: this.send }
                 ).then(res => {
                     console.log(res);
                 }).catch(err => {
                     console.log(err);
                 }).finally(()=>{
-                    window.location.href=`/api/reserve/${this.screeningid}/success`;
+                    // $target = ''.concat('/reserve/', $this.screeningid, '/success?s=', JSON.parse(JSON.stringify(this.send.seat)).toString().replace(/,/g, '+'));
+                    window.location.href=`/reserve/${this.screeningid}/success/${JSON.stringify(this.send.seat).replace(/,/g, '+').replace(/\[|\]/g, '')}`;
                 })
 
 

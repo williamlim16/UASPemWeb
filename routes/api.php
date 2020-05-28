@@ -22,6 +22,3 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     'except' => ['edit', 'show']
 // ]);
 
-Route::get('/reserve/{sid}', 'ReserveController@index');
-Route::post('/reserve/{sid}/store', 'ReserveController@store');
-Route::get('/reserve/{sid}/success', 'ReserveController@success');
