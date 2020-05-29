@@ -5,6 +5,10 @@
         "This file is @generated automatically"
     ],
     "content-hash": "bdb95b8b53bffc27879615e4b2af7bc5",
+<<<<<<< HEAD
+=======
+
+>>>>>>> b75e998bfcc1aded0cf28b805edc4ab654650cce
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3904,7 +3908,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2020-05-26T06:40:44+00:00"
+=======
+            "time": "2020-03-13T01:23:26+00:00"
+>>>>>>> b75e998bfcc1aded0cf28b805edc4ab654650cce
         },
         {
             "name": "yajra/laravel-datatables-oracle",
@@ -3986,6 +3994,10 @@
                 }
             ],
             "time": "2020-04-23T01:21:11+00:00"
+<<<<<<< HEAD
+=======
+
+>>>>>>> b75e998bfcc1aded0cf28b805edc4ab654650cce
         }
     ],
     "packages-dev": [
