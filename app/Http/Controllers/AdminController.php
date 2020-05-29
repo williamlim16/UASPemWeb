@@ -7,11 +7,12 @@ use Response;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\DB;
-use App\Movie;
+
 use Yajra\DataTables\DataTables;
 
+use App\Movie;
+use App\Screening;
 
 class AdminController extends Controller
 {
@@ -39,7 +40,6 @@ class AdminController extends Controller
      */
     public function index()
     { 
-
         return view('admin.dashboard');
     }
     //=========================[[[MOVIE]]]=========================
@@ -67,17 +67,14 @@ class AdminController extends Controller
         }
         return view('admin.movie.index');
     }
-
-    
     public function movieCreate(Request $request){
         return view('admin.movie.create');  
     }
-    public function movieDetail($movieId){
-        $data = Movie::find($movieId);
-        return view('admin.movie.detail', ['movie' => $data]);
-    }
-    public function movieInsert(Request $request)
-    {
+    // public function movieDetail($movieId){
+    //     $data = Movie::find($movieId);
+    //     return view('admin.movie.detail', ['movie' => $data]);
+    // }
+    public function movieInsert(Request $request){
         $movie = new Movie();
         $in = $request->only(['title', 'director', 'synopsis', 'time', 'age', 'categories', 'casts', 'posterpath']);
 
@@ -87,9 +84,7 @@ class AdminController extends Controller
         // $movie->save();
         return redirect('/admin/movie/success');
     }
-
-    public function edit($id)
-    {
+    public function movieEdit($id){
         $movie = Movie::find($id);
         $casts = '';
         foreach($movie->casts as $index=>$actor){
@@ -109,23 +104,87 @@ class AdminController extends Controller
         $movie->casts = $casts;
         return view('admin.movie.edit', ['movie' => $movie]);
     }
-
-    public function destroy($id)
-    {
+    public function movieDestroy($id){
         $movie = Movie::findOrfail($id);
         $movie->delete();
         return redirect('/admin/movie/');
     }
-
     public function movieSuccess(){
         return view('admin.movie.success');
     }
 
     //=========================[[[SCREENING AND TICKETING]]]=========================
-    public function screening(){
+    public function screening(Request $request){
+        if ($request->ajax()) {
+            $data = DB::table('screening')
+                    ->join('movie', 'screening.movie_id', '=', 'movie.id')
+                    ->join('auditorium', 'screening.auditorium_id', '=', 'auditorium.id')
+                    ->select('screening.id as sId', 
+                        'screening.date as sDate', 
+                        'screening.time as sTime', 
 
+                        'movie.id as mId',
+                        'movie.title as title', 
+                        'movie.posterpath as posterpath', 
+                        'movie.time as duration', 
+                        'movie.age as age', 
+                        'movie.categories as categories', 
+
+                        'auditorium.id as aId', 
+                        'auditorium.name as aName', 
+                        'auditorium.seats_no as seats')
+                    ->get();
+            for($i = 0; $i < count($data); $i++){
+                $data[$i]->categories = str_replace( array('[', ']', '"'),'',$data[$i]->categories);
+                $data[$i]->booked = DB::table('reservation')->selectRaw('count(*) as count')->where('screening_id', $data[$i]->sId)->groupBy('screening_id')->first();
+            }
+            
+
+            // $this->info($data);
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                            $btn = '<a href="screening/edit/'.$row->sId.'" data-toggle="tooltip"  data-id="'.$row->sId.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editItem">Edit</a>';
+                            $btn = $btn.' <a href="screening/delete/'.$row->sId.'" data-toggle="tooltip"  data-id="'.$row->sId.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteItem">Delete</a>';
+                            return $btn;
+                    })
+                    // ->addColumn('thumbnail', function($row){
+                    //     $img = '<img src=/'.$row->posterpath.' style="width:50px;height:50px">';
+                    //     return $img;
+                    // })
+                    // ->rawColumns(['thumbnail'])
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+        // $a = DB::table('reservation')->selectRaw('count(*)')->groupBy('screening_id')->get();
+        return view('admin.screening.index');
     }
-    
+    public function screeningCreate(Request $request){
+        return view('admin.screening.create');  
+    }
+    public function screeningDetail($screeningId){
+        $data = Screening::find($screeningId);
+        return view('admin.screening.detail', ['movie' => $data]);
+    }
+    public function screeningInsert(Request $request){
+        $screening = new Screening();
+        $in = $request->only(['id', 'movie_id', 'auditorium_id', 'date', 'time']);
+        $screening->insert($in);
+        // $screening->save();
+        return redirect('/admin/screening/success');
+    }
+    public function screeningEdit($id){
+        $screening = Screening::find($id);
+        return view('admin.movie.edit', ['movie' => $movie]);
+    }
+    public function screenignDestroy($id){
+        $screening = Screening::findOrfail($id);
+        $screening->delete();
+        return redirect('/admin/screening/');
+    }
+    public function screeningSuccess(){
+        return view('admin.screening.success');
+    }
 
     //=========================[[[AUDITORIUM, ETC]]]=========================
     public function facility(){
