@@ -124,6 +124,28 @@
                     </tbody>
                 </table>
             </div>
+
+            <hr>
+            
+            {{-- ticket bellow --}}
+            <div class="container mt-5">
+                <h1 style="color:black; float:left">Ticket Reservations</h1>
+                <a href="/admin/screening/ticket/create" style="float:right"><button class="btn btn-info">Add Ticket Reservation</button></a>
+                <table id="ticketTable" class="table table-bordered data-table" >
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Seat</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Created At</th>
+                            <th width="100px">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
         </main>
     </div>
 
@@ -194,52 +216,67 @@
 
                     {data: 'action', name: 'action', orderable: false, searchable: false}
               ],
-          });
-          $('#screeningTable tbody').on('click', 'td.details-control', function () {
-            var tr = $(this).closest('tr');
-            var row = table.row( tr );
+            });
+            var ticket = $('#ticketTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('admin.ticket') }}",
+                columns: [
+                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                    {data: 'seat', name: 'seat'},
+                    {data: 'name', name: 'name'},
+                    {data: 'email', name: 'email'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                ]
+            });
 
-            if ( row.child.isShown() ) {
-                // This row is already open - close it
-                row.child.hide();
-                tr.removeClass('shown');
+            $('#screeningTable tbody').on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row( tr );
+
+                if ( row.child.isShown() ) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    // Open this row
+                    row.child( format(row.data()) ).show();
+                    tr.addClass('shown');
+                }
+            });
+            function format ( d ) {
+                console.log(d);
+                // `d` is the original data object for the row
+                return '<table class="table">'+
+                    '<tr class="table-secondary">'+
+                        '<td style="width:30%">Movie ID - Title:</td>'+
+                        '<td style="width:69%">'+ d.mId + ' - ' + d.title + '</td>'+
+                        '</tr>'+
+                    '<tr class="table-secondary">'+
+                        '<td>Thumbnail :</td>'+
+                        '<td> <img src="/' +d.posterpath+'" style="width:50px;height:50px;"> </td>'+
+                        '</tr>'+
+                    '<tr class="table-secondary">'+
+                        '<td>[Age Rating] and Cateogories:</td>'+
+                        '<td>PG-['+ d.age + '], '+ d.categories + '</td>'+
+                        '</tr>'+
+                    '<tr class="table-secondary">'+
+                        '<td>Auditorium ID - Name: </td>'+
+                        '<td>'+ d.aId + ' - ' + d.aName + '</td>'+
+                        '</tr>'+
+                    '<tr class="table-secondary">'+
+                        '<td>Auditorium booked seat(s): </td>'+
+                        '<td>'+ (d.booked==null?0:d.booked.count)+ '</td>'+
+                        '</tr>'+
+                    '<tr class="table-secondary">'+
+                        '<td>Available seat(s): </td>'+
+                        '<td>'+ (d.seats - (d.booked==null?0:d.booked.count)) + '/' + d.seats+ '</td>'+
+                        '</tr>'+
+                    '</table>'+
+                    '<div class="row justify-content-md-center"><a href="/admin/screening/ticket/' + d.sId+'"> <button class="btn btn-secondary">Manage Tickets</button></a></div>';
             }
-            else {
-                // Open this row
-                row.child( format(row.data()) ).show();
-                tr.addClass('shown');
-            }
-        });
-        function format ( d ) {
-            console.log(d);
-            // `d` is the original data object for the row
-            return '<table class="table">'+
-                '<tr class="table-secondary">'+
-                    '<td style="width:30%">Movie ID - Title:</td>'+
-                    '<td style="width:69%">'+ d.mId + ' - ' + d.title + '</td>'+
-                    '</tr>'+
-                '<tr class="table-secondary">'+
-                    '<td>Thumbnail :</td>'+
-                    '<td> <img src="/' +d.posterpath+'" style="width:50px;height:50px;"> </td>'+
-                    '</tr>'+
-                '<tr class="table-secondary">'+
-                    '<td>[Age Rating] and Cateogories:</td>'+
-                    '<td>PG-['+ d.age + '], '+ d.categories + '</td>'+
-                    '</tr>'+
-                '<tr class="table-secondary">'+
-                    '<td>Auditorium ID - Name: </td>'+
-                    '<td>'+ d.aId + ' - ' + d.aName + '</td>'+
-                    '</tr>'+
-                '<tr class="table-secondary">'+
-                    '<td>Auditorium booked seat(s): </td>'+
-                    '<td>'+ (d.booked==null?0:d.booked.count)+ '</td>'+
-                    '</tr>'+
-                '<tr class="table-secondary">'+
-                    '<td>Auditorium seat count: </td>'+
-                    '<td>'+ (d.seats - (d.booked==null?0:d.booked.count)) + '/' + d.seats+ '</td>'+
-                    '</tr>'+
-                '</table>';
-        }
         });
     </script>
 </body>

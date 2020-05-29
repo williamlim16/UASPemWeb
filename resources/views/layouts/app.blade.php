@@ -48,7 +48,7 @@
                     <ul class="navbar-nav mr-auto">
                         @if(Auth::id() == 1)
                         <a href="/admin">
-                          <button class="btn btn-secondary">Open Admin Dashboard</button>
+                          <button class="btn btn-secondary m-0" style="padding: 0.375rem 0.75rem;font-size: 0.9rem;line-height: 1.6;text-transform:none; max-width:100%">Open Admin Dashboard</button>
                         </a>
                         @endif
                     </ul>

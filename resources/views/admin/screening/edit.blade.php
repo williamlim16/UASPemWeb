@@ -4,15 +4,15 @@
 <div class="container">
     <div class="row justify-content-md-center">
         <div class="col-9">
-            <form action="/admin/screening/store" method="post">
+            <form action="/screening/{{$screening->id}}" method="post">
                 @csrf
                 @method('PATCH')
                 <div class="form-group">
-                    <label for="movie_id">Movie to be shown :</label>
+                    <label for="movie_id">Movie :</label>
                     {{-- <input type="text" class="form-control" id="movie_id" name="movie_id" > --}}
                     <select id="movie_id" name="movie_id" class="custom-select">
                         @foreach($movie as $m)
-                            <option value='{{$m->id}}' @if($loop->index == 0){{"selected"}}@endif>{{"[".$m->id."] ".$m->title." | ".$m->time."min | PG-".$m->age}}</option>
+                            <option value='{{$m->id}}' @if($m->id == $screening->movie_id){{"selected"}}@endif>{{"[".$m->id."] ".$m->title." | ".$m->time."min | PG-".$m->age}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -27,23 +27,23 @@
                     </div>
                 </div> --}}
                 <div class="form-group">
-                    <label for="auditorium">Pick an Auditorium :</label>
+                    <label for="auditorium">Auditorium :</label>
                     {{-- <input type="text" class="form-control" id="auditorium_id" name="auditorium_id" > --}}
                     <select id="auditorium_id" name="auditorium_id" class="custom-select">
                         @foreach($audi as $a)
-                            <option value='{{$a->id}}' @if($loop->index == 0){{"selected"}}@endif>{{"[".$a->id."] ".$a->name." | ".$a->seats_no." seats"}}</option>
+                            <option value='{{$a->id}}' @if($a->id == $screening->auditorium_id){{"selected"}}@endif>{{"[".$a->id."] ".$a->name." | ".$a->seats_no." seats"}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="date">Date of screening :</label>
-                    <input type="date" class="form-control" id="date" name="date"></textarea>
+                    <input type="date" class="form-control" id="date" name="date" value="{{$screening->date}}"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="time">Time :</label>
-                    <input type="time" class="form-control" id="time" name="time" >
+                    <input type="time" class="form-control" id="time" name="time" value="{{$screening->time}}">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
     </div>

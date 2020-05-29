@@ -13,6 +13,8 @@ use Yajra\DataTables\DataTables;
 
 use App\Movie;
 use App\Screening;
+use App\Auditorium;
+use App\Reservation;
 
 class AdminController extends Controller
 {
@@ -160,11 +162,15 @@ class AdminController extends Controller
         return view('admin.screening.index');
     }
     public function screeningCreate(Request $request){
-        return view('admin.screening.create');  
+        $movies = Movie::all();
+        $audi = Auditorium::all();
+        return view('admin.screening.create', ['movie' => $movies, 'audi' => $audi]);  
     }
     public function screeningDetail($screeningId){
         $data = Screening::find($screeningId);
-        return view('admin.screening.detail', ['movie' => $data]);
+        $movies = Movie::all();
+        $audi = Auditorium::all();
+        return view('admin.screening.detail', ['screening' => $data, 'movie' => $movies, 'audi' => $audi]);
     }
     public function screeningInsert(Request $request){
         $screening = new Screening();
@@ -175,15 +181,49 @@ class AdminController extends Controller
     }
     public function screeningEdit($id){
         $screening = Screening::find($id);
-        return view('admin.movie.edit', ['movie' => $movie]);
+        $movies = Movie::all();
+        $audi = Auditorium::all();
+        return view('admin.screening.edit', ['screening' => $screening, 'movie' => $movies, 'audi' => $audi]);
     }
-    public function screenignDestroy($id){
+    public function screeningDestroy($id){
         $screening = Screening::findOrfail($id);
         $screening->delete();
         return redirect('/admin/screening/');
     }
     public function screeningSuccess(){
-        return view('admin.screening.success');
+        $latest = Screening::orderBy("id", "DESC")->first();
+        $movie = Movie::find($latest->movie_id);
+        $audi = Auditorium::find($latest->auditorium_id);
+        return view('admin.screening.success', ['latest' => $latest, 'movie'=>$movie, 'audi' => $audi]);
+    }
+
+    public function ticketTable(Request $request){
+        if ($request->ajax()) {
+            $data = DB::table('reservation')
+                    ->join('users', 'reservation.user_id', '=', 'users.id')
+                    ->join('seat', 'reservation.seat_id', '=', 'seat.id')
+                    ->select('reservation.screening_id as screeningId', 
+                        'reservation.seat_id as seatId', 
+                        'reservation.user_id as userId', 
+                        'reservation.created_at as created_at',
+
+                        'users.name as name',
+                        'users.email as email',
+                        
+                        DB::raw('CONCAT(seat.row," ",seat.number) as seat')
+                        )
+                    ->get();
+
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                            $btn = '<a href="/admin/screening/ticket/edit/'.$row->screeningId.'/'.$row->seatId.'" data-toggle="tooltip"  data-id="'.$row->screeningId.'|'.$row->seatId.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editItem">Edit</a>';
+                            $btn = $btn.' <a href="/admin/screening/ticket/delete/'.$row->screeningId.'/'.$row->seatId.'" data-toggle="tooltip"  data-id="'.$row->screeningId.'|'.$row->seatId.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteItem">Delete</a>';
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
     }
 
     //=========================[[[AUDITORIUM, ETC]]]=========================
@@ -196,4 +236,6 @@ class AdminController extends Controller
     public function statistics(){
 
     }
+
+    
 }

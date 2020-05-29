@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Screening;
+use App\Auditorium;
 
-class ScreeningController extends Controller
+class AuditoriumController extends Controller
 {
 
     public function __construct()
@@ -21,10 +21,10 @@ class ScreeningController extends Controller
    
     public function update(Request $request, $id)
     {
-        $screening = Screening::find($id);
+        $movie = Movie::find($id);
         $in = $request->all();
-        $screening->update($in);
-        $screening->save();
+        $movie->update($in);
+        $movie->save();
         return redirect('/admin/screening/success');
     }
 
