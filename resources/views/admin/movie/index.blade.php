@@ -108,6 +108,7 @@
                             <th>Categories</th>
                             <th>Casts</th>
                             <th>Posterpath</th>
+                            <th>Thumbnail</th>
                             <th width="100px">Action</th>
                         </tr>
                     </thead>
@@ -173,7 +174,8 @@
                   {data: 'categories', name: 'categories'},
                   {data: 'casts', name: 'casts'},
                   {data: 'posterpath', name: 'posterpath'},
-                  {data: 'action', name: 'action', orderable: false, searchable: false},
+                  {data: 'thumbnail', name: 'thumbnail'},
+                  {data: 'action', name: 'action', orderable: false, searchable: false}
               ],
               "scrollX": true
           });

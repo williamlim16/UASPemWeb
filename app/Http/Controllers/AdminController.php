@@ -58,7 +58,11 @@ class AdminController extends Controller
                             $btn = $btn.' <a href="movie/delete/'.$row->id.'" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteItem">Delete</a>';
                             return $btn;
                     })
-                    ->rawColumns(['action'])
+                    ->addColumn('thumbnail', function($row){
+                        $img = '<img src=/'.$row->posterpath.' style="width:50px;height:50px">';
+                        return $img;
+                    })
+                    ->rawColumns(['thumbnail', 'action'])
                     ->make(true);
         }
         return view('admin.movie.index');
