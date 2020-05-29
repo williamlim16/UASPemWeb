@@ -9,7 +9,7 @@
     <div class="info_section">
         <div class="col-md-6 movie_header">
 
-            <img class="thumbnail" src="{{$movie->posterpath}}"/>
+            <img class="thumbnail" src="/{{$movie->posterpath}}"/>
             <h1>{{ $movie->title}} </h1>
             <span class="minutes"> {{ $movie->time}}m</span>
             <p class="type">
@@ -90,17 +90,19 @@
                 <input type="submit" name="reserve-btn" id="submit" class="btn-lg btn-primary" value="Reserve">
                 </form>
             </div>
-            <div class="col-md-2">
+            <!--DELETE NYA DI CRUD LAIN, JANGAN DISINI-->
+            {{-- <div class="col-md-2">
                 <form action="" method="POST">
                 @csrf
                 @method('DELETE')
                 <input type="submit" name="delete-btn" id="submit" class="btn-lg btn-danger" value="Delete">
                 </form>
-            </div>
+            </div> --}}
+            <!--DELETE NYA DI CRUD LAIN, JANGAN DISINI-->
         </div>
     </div>
     <div class="blur_back" style="background-image: url('/img/inception_details.jpg')"></div>
-{{-- <div class="blur_back" style="background-image: url('{{ $movie->thumbnail }}')"></div> --}}
+    {{-- <div class="blur_back" style="background-image: url('/{{ $movie->posterpath }}')"></div> --}}
 
 </div>
 @endsection
