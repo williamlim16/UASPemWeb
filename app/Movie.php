@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Movie extends Model
 {
     protected $fillable = ['id', 'title', 'director', 'sypnosis', 'time', 'age', 'categories', 'casts', 'posterpath'];
-    protected $casts =  ['categories'=>'array', 'casts'=>'array'];
+    protected $casts =  ['categories' => 'array', 'casts' => 'array'];
     protected $table = 'movie';
     public $timestamps = false;
-
-    
 }
