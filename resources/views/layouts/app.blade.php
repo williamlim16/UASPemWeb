@@ -26,6 +26,8 @@
     <link href="{{ asset('css/movie-card.css') }}" rel="stylesheet">
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
     <link rel = "icon" href ="/img/film-roll.png"type = "image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
 
 </head>
 
@@ -45,7 +47,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @if(Auth::id() == 1)
-                        <a href="/admin"> 
+                        <a href="/admin">
                           <button class="btn btn-secondary">Open Admin Dashboard</button>
                         </a>
                         @endif

@@ -53,7 +53,7 @@
   background-size: contain;
   background-size: cover;
   z-index: 1 !important;
-  width: 375px;
+  width: 350px;
   height: 600px;
   display: block;
   border-radius: 4px;
@@ -291,5 +291,9 @@ h5 {
   bottom: 15px;
   right: 15px;
   border-radius: 50px;
+}
+
+.rmv:hover {
+  color: red;
 }
 
