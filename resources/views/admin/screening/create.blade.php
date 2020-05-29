@@ -9,7 +9,7 @@
             <label for="movie">Movie to be shown :</label>
             <input type="text" class="form-control" id="movie" name="movie" >
         </div>
-        <div class="form-group row">
+        {{-- <div class="form-group row">
             <div class="col-5">
                 <label for="duration">Duration</label>
                 <input type="text" class="form-control" id="duration" name="duration" readonly>
@@ -18,7 +18,7 @@
                 <label for="age">Age rating</label>
                 <input type="text" class="form-control" id="age" name="age" readonly>
             </div>
-        </div>
+        </div> --}}
         <div class="form-group">
             <label for="auditorium">Pick an Auditorium :</label>
             <input type="text" class="form-control" id="auditorium" name="auditorium" >
