@@ -226,6 +226,58 @@ class AdminController extends Controller
         }
     }
 
+    public function ticketCreate(){
+        $screening = DB::table('screening')
+                    ->join('movie', 'movie.id', '=', 'screening.movie_id')
+                    ->join('auditorium', 'auditorium.id' , '=', 'screening.auditorium_id')
+                    ->select('movie.id as mId',
+                    'movie.title as title',
+
+                    'screening.id as sId',
+                    'screening.date as date',
+                    'screening.time as time',
+                    'screening.auditorium_id as aId',
+                    'auditorium.name as aName')
+
+                ->get();
+        $users = DB::table('users')->get();
+
+        return view('admin.screening.createTicket', ['screenings' => $screening, 'users' => $users]);
+    }
+
+    public function ticketSeat(Request $request){
+        $arr = explode(',', $request->id);
+        $sId = $arr[0];//screening Id
+        $aId = $arr[1];//audi Id
+
+
+        $taken =  Reservation::where('screening_id', '=', $sId)->pluck('seat_id')->toArray();
+
+        $available = DB::table('seat')
+                ->select('id',
+                        'row',
+                        'number')
+                ->whereNotIn('id', $taken)
+                ->where('auditorium_id', '=', $aId)
+                ->get();
+                    
+
+
+        return response()->json(['data' => $available]);
+    }
+
+    public function ticketInsert(){
+
+    }
+
+    public function ticketEdit($screening_id, $seat_id){
+
+    }
+
+    public function ticketDestroy($screening_id, $seat_id){
+
+    }
+
     //=========================[[[AUDITORIUM, ETC]]]=========================
     public function facility(){
 

@@ -34,10 +34,11 @@ Route::get('/admin/screening/delete/{sid}', 'AdminController@screeningDestroy');
 Route::get('/admin/screening/success', 'AdminController@screeningSuccess');
 
 Route::get('/admin/screening/ticket', ['uses'=>'AdminController@ticketTable', 'as'=>'admin.ticket']);
-Route::get('/admin/screening/ticket/create', 'AdminController@ticketTable');
-Route::get('/admin/screening/ticket/edit/{screening_id}/{seat_id}', 'AdminController@ticketTable');
-Route::get('/admin/screening/ticket/delete/{screening_id}/{seat_id}', 'AdminController@ticketTable');
-
+Route::get('/admin/screening/ticket/create', 'AdminController@ticketCreate');
+Route::patch('/admin/screening/ticket/store', 'AdminController@ticketInsert');
+Route::get('/admin/screening/ticket/edit/{screening_id}/{seat_id}', 'AdminController@ticketEdit');
+Route::get('/admin/screening/ticket/delete/{screening_id}/{seat_id}', 'AdminController@ticketDestroy');
+Route::post('/admin/screening/ticket/seats', ['uses' => 'AdminController@ticketSeat', 'as'=>'admin.checkseat']);
 
 Route::get('/admin/facility', 'AdminController@facility');
 Route::get('/admin/statistics', 'AdminController@statistics');

@@ -134,7 +134,8 @@
                 <table id="ticketTable" class="table table-bordered data-table" >
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="30px">No</th>
+                            <th width="100px">Screening ID</th>
                             <th>Seat</th>
                             <th>Name</th>
                             <th>Email</th>
@@ -216,19 +217,23 @@
 
                     {data: 'action', name: 'action', orderable: false, searchable: false}
               ],
+              "order": [[ 1, "asc" ]]
+
             });
             var ticket = $('#ticketTable').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('admin.ticket') }}",
                 columns: [
-                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                    {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false},
+                    {data: 'screeningId', name:'screeningId'},
                     {data: 'seat', name: 'seat'},
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'action', name: 'action', orderable: false, searchable: false}
-                ]
+                ],
+                "order": [[ 1, "asc" ]]
             });
 
             $('#screeningTable tbody').on('click', 'td.details-control', function () {
@@ -274,8 +279,7 @@
                         '<td>Available seat(s): </td>'+
                         '<td>'+ (d.seats - (d.booked==null?0:d.booked.count)) + '/' + d.seats+ '</td>'+
                         '</tr>'+
-                    '</table>'+
-                    '<div class="row justify-content-md-center"><a href="/admin/screening/ticket/' + d.sId+'"> <button class="btn btn-secondary">Manage Tickets</button></a></div>';
+                    '</table>'
             }
         });
     </script>
