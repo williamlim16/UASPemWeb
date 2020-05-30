@@ -81,9 +81,10 @@ class AdminController extends Controller
         $in = $request->only(['title', 'director', 'synopsis', 'time', 'age', 'categories', 'casts', 'posterpath']);
         $file = $request->file('poster');
         $filename = $in['title'].".".$file->getClientOriginalExtension();
-        $target = 'public/img';
+        $filename = str_replace(' ', '',$filename);
+        $target = 'movie/img';
         $file->move($target,$filename);
-        $in['posterpath'] = 'public/img/'.$filename;
+        $in['posterpath'] = 'movie/img/'.$filename;
         $in['categories'] = '["'.str_replace(',', '","', str_replace(', ', ',', $in['categories'])).'"]';
         $in['casts'] = '["'.str_replace(',', '","', str_replace(', ', ',', $in['casts'])).'"]';
         $movie->insert($in);
@@ -118,9 +119,9 @@ class AdminController extends Controller
         $movie = Movie::find($id);
         $file = $req->file('poster');
         $filename = $movie['title'].".".$file->getClientOriginalExtension();
-        $target = 'public/img';
+        $target = 'movie/img';
         $file->move($target,$filename);
-        DB::table('movie')->where('id',$id)->update(['posterpath'=>"public/img/".$filename]);
+        DB::table('movie')->where('id',$id)->update(['posterpath'=>"movie/img/".$filename]);
         return redirect('/admin/movie/success');
     }
     public function movieDestroy($id){
