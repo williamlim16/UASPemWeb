@@ -70,7 +70,6 @@ body {
 }
 
 .movie_card .info_section .movie_desc {
-  padding-bottom: 80px;
   color: white;
   word-wrap: break-word;
 }
@@ -229,6 +228,8 @@ body {
 
 .cast p {
   color: white;
+  word-wrap: break-word;
+  margin-top: 5px;
 }
 
 .cast-icon {
