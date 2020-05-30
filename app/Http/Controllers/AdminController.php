@@ -69,8 +69,9 @@ class AdminController extends Controller
         }
         return view('admin.movie.index');
     }
-    public function movieCreate(Request $request){
-        return view('admin.movie.create');
+
+    public function movieCreate(){
+        return view('admin.movie.create');  
     }
     // public function movieDetail($movieId){
     //     $data = Movie::find($movieId);
@@ -313,10 +314,76 @@ class AdminController extends Controller
     }
 
     //=========================[[[AUDITORIUM, ETC]]]=========================
-    public function facility(){
+    public function facility(Request $request){
+        if ($request->ajax()) {
+            $data = DB::table('auditorium')
+                    ->leftJoin('screening', 'screening.auditorium_id', '=', 'auditorium.id')
+                    ->select(array('auditorium.id as id',
+                            'auditorium.name as name',
+                            'auditorium.seats_no as seats_no',
+                            DB::raw('count(screening.id) as use_count'))
+                    )->groupBy(['auditorium.id', 'auditorium.name', 'auditorium.seats_no'])
+                    ->get();
+            
+            
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                            // $btn = '<a href="facility/edit/'.$row->id.'" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editItem">Edit</a>';
+                            $btn = ' <a href="facility/delete/'.$row->id.'" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteItem">Delete</a>';
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
+
         return view('admin.facility.index');
     }
 
+    public function facilityCreate(){
+        return view('admin.facility.create');
+    }
+
+    public function facilityInsert(Request $request){
+        $f = new Auditorium();
+        $in = $request->only(['name', 'seats_no']);
+
+        $f->insert($in);
+        //create seats
+
+        $id = DB::table('auditorium')->select('id')->latest('id')->first();
+        $id = $id->id;
+        $row = $request->only('row')['row'];
+        $count = $request->only('seats_no')['seats_no'];
+        
+        $char = 'A';
+        $data = array();
+        $curr = 1;
+        for($i = 0; $i < $count; $i++){
+            $data[] = ['row'=>$char, 'number'=>$curr, 'auditorium_id'=>$id];
+            $curr++;
+            if($curr > $row){
+                if($char == 'Z') $char = 'a';
+                else $char++;
+                $curr = 1;
+            }
+        }
+        DB::table('seat')->insert($data);
+
+        return view('/admin/facility/success', ['a'=>$row]);
+    }
+
+    public function facilityDestroy($id){
+        $seat = DB::table('seat')->where('auditorium_id', $id)->delete();
+        $reserve = Auditorium::findOrfail($id);
+        $reserve->delete();
+        return redirect('/admin/facility/');
+    }
+
+    public function facilitySuccess(){
+        return view('admin.facility.success');
+    }
 
     //=========================[[[STATISTIC]]]=========================
     public function statistics(){
