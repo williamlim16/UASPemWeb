@@ -41,5 +41,16 @@ Route::post('/admin/screening/ticket/update/{screening_id}/{seat_id}', 'AdminCon
 Route::get('/admin/screening/ticket/delete/{screening_id}/{seat_id}', 'AdminController@ticketDestroy');
 Route::post('/admin/screening/ticket/seats', ['uses' => 'AdminController@ticketSeat', 'as'=>'admin.checkseat']);
 
-Route::get('/admin/facility', 'AdminController@facility');
+Route::get('/admin/facility', ['uses'=>'AdminController@facility', 'as'=>'admin.facility']);
+Route::get('/admin/facility/create', 'AdminController@facilityCreate');
+Route::patch('/admin/facility/store', 'AdminController@facilityInsert');
+Route::get('/admin/facility/delete/{sid}', 'AdminController@facilityDestroy');
+Route::get('/admin/facility/success', 'AdminController@facilitySuccess');
+
+
+
+
+
+
+
 Route::get('/admin/statistics', 'AdminController@statistics');
