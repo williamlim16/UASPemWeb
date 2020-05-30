@@ -2,7 +2,6 @@
 
 
 @section('content')
-<?php print_r($movie);?>
 <div class="container">
     <form action="/movie/{{$movie->id}}" method="post">
         @csrf
@@ -39,9 +38,9 @@
             <label for="posterpath">Poster path </label>
             <input type="text" class="form-control" id="posterpath" name="posterpath" value="{{$movie->posterpath}}">
         </div>
-
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    <a href="/admin/movie/edit/poster/{{$movie->id}}" class="btn btn-warning mt-2">Change poster</a>
 </div>
 
 @endsection
