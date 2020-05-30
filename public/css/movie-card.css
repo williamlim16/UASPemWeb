@@ -293,7 +293,18 @@ h5 {
   border-radius: 50px;
 }
 
+.rmv {
+  padding: 1;
+}
+
 .rmv:hover {
   color: red;
+}
+
+.synopsis {
+  color: white;
+  word-wrap: break-word;
+  width: 320px;
+  height: auto;
 }
 

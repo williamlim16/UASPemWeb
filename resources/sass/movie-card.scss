@@ -349,4 +349,13 @@ h5 {
     &:hover {
         color: red;
     }
+
+    padding: 1;
+}
+
+.synopsis {
+    color: white;
+    word-wrap: break-word;
+    width: 320px;
+    height: auto;
 }
