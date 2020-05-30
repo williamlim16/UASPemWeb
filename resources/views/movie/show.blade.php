@@ -7,8 +7,7 @@
 
 <div class="row movie_card">
     <div class="info_section">
-        <div class="col-md-6 movie_header">
-
+        <div class="col-md-6 movie_header mb-3">
             <img class="thumbnail" src="/{{$movie->posterpath}}"/>
             <h1>{{ $movie->title}} </h1>
             <span class="minutes"> {{ $movie->time}}m</span>
@@ -25,7 +24,7 @@
                     {{ $movie->synopsis }}
                 </p>
              </div>
-        <div class="col-md-6" style="margin-top:100px">
+        <div class="col-md-6" style="margin-top:150px">
             <div class="row cast">
                 <div class="col-md-2">
                     <h4>Director</h4>
