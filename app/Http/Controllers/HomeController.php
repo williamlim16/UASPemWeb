@@ -29,8 +29,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $movies = Movie::all();
+        $movies = Movie::orderBy('id', 'desc')->get();
 
-        return view('welcome', ['movies' => $movies]);
+        return view('welcome', [
+            'movies' => $movies,
+            'sort_type' => 'Latest'
+        ]);
+    }
+
+    public function sort($sort)
+    {
+        if ($sort == 'latest') {
+            $movies = Movie::orderBy('id', 'desc')->get();
+        } else if ($sort == 'alphabetical') {
+            $movies = Movie::orderBy('title')->get();
+        } else {
+            $movies = Movie::orderBy('id', 'asc')->get();
+        }
+        return view('welcome', [
+            'movies' => $movies,
+            'sort_type' => $sort
+        ]);
     }
 }

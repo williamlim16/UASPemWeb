@@ -39,22 +39,51 @@
     {{-- Search --}}
 
     {{-- Filter --}}
-    <div class="container mt-4">
+    <div class="container mt-4 offset-2">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-sm-1">
                 <div class="dropdown show">
                     <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Year
+                        Sort By
                     </a>
+
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <button class="dropdown-item">2020</button>
-                        <button class="dropdown-item">2019</button>
-                        <button class="dropdown-item">2015-2018</button>
+                        <a href="{{ route('home.sort', 'alphabetical') }}" class="dropdown-item sort">Alphabetical</a>
+                        <a href="{{ route('home.sort', 'latest') }}" class="dropdown-item sort">Latest</a>
+                        <a href="{{ route('home.sort', 'oldest') }}" class="dropdown-item sort">Oldest</a>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-sm-1 mr-4">
+                <div class="dropdown show">
+                    <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Age Rating
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <button class="dropdown-item filter" value="G">G</button>
+                        <button class="dropdown-item filter" value="PG">PG</button>
+                        <button class="dropdown-item filter" value="PG-13">PG-13</button>
+                        <button class="dropdown-item filter" value="R">R</button>
+                        <button class="dropdown-item filter" value="NC-17">NC-17</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-1 mr-2">
+                <div class="dropdown show">
+                    <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Duration
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <button class="dropdown-item filter" value="> 2 hours"> > 2 hours</button>
+                        <button class="dropdown-item filter" value="< 2 hours"> < 2 hours</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-1 mr-4">
                 <div class="dropdown show">
                     <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Genre
@@ -68,53 +97,13 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-2">
-                <div class="dropdown show">
-                    <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Age Rating
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <button class="dropdown-item">G</button>
-                        <button class="dropdown-item">PG</button>
-                        <button class="dropdown-item">PG-13</button>
-                        <button class="dropdown-item">R</button>
-                        <button class="dropdown-item">NC-17</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-2">
-                <div class="dropdown show">
-                    <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Duration
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <button class="dropdown-item filter" value="> 2 hours"> > 2 hours</button>
-                        <button class="dropdown-item filter" value="< 2 hours"> < 2 hours</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-2">
-                <div class="dropdown show">
-                    <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Order By
-                    </a>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <button class="dropdown-item">Alphabetical</button>
-                        <button class="dropdown-item">Latest</button>
-                        <button class="dropdown-item">Oldest</button>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     {{-- Filter --}}
 
     <div class="container mt-5" id="myDIV">
         <h3><strong>Now Showing</strong></h3>
+        <h3>Sort by: {{ ucfirst($sort_type) }}</h3>
         <div class="filter-result"></div>
         <div class="row">
         @foreach($movies as $movie)
@@ -130,7 +119,6 @@
                                     <ul class="movie-gen">
                                         <li>PG- {{ $movie->age }}  /</li>
                                         <li> {{ intval(($movie->time)/60) }}h{{ intval(($movie->time)%60) }}m /</li>
-                                        {{-- <input type="text" id="duration" value="{{ intval(($movie->time)/60) >= 2 ? "> 2 hours" : "< 2 hours"}}"> --}}
                                         <p hidden>{{ intval(($movie->time)/60) >= 2 ? "> 2 hours" : "< 2 hours"}}</p>
                                         <li>
                                             @foreach($movie->categories as $genre)
@@ -160,7 +148,7 @@
                                 </p>
                                 </div>
                             </div>
-                            <div class="mr-grid actors-row ml-3" style="color:white">
+                            <div class="mr-grid actors-row ml-3 synopsis">
                                 {{$movie->synopsis}}
                             </div>
                         </div>
@@ -171,39 +159,52 @@
         @endforeach
         </div>
     </div>
+        <script>
+            $(document).ready(function(){
+            // Search bar
+                $("#myInput").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#myDIV a").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
 
-    <script>
-    $(document).ready(function(){
-    // Search bar
-        $("#myInput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#myDIV a").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            // Dropdown Filter
+                $('.filter').on('click', function () {
+                    $(".filter-result").html("");
+                    var filter_value = $(this).val();
+                    $(".filter-result").append('<h4 style="color: black">Showing results for: '
+                    + filter_value
+                    + '</h4><button class="btn btn-light rmv"><i class="fas fa-times"></i> Remove Filter</button>');
+                    $("#myDIV a").filter(function() {
+                        $(this).toggle($(this).text().indexOf(filter_value) > -1)
+                    });
+                });
+
+            //Remove Filter
+                $(document).on('click', '.rmv', function(){ //for dynamically created button
+                    $(".filter-result").html("")
+                    $("#myInput").val("")
+                    $("#myDIV a").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf('') > -1)
+                    });
+                });
+
+            //Animate scroll
+                $(".filter").click(function() {
+                    $('html,body').animate({
+                        scrollTop: $("#myDIV").offset().top},
+                        'slow');
+                });
+
+            //if search result is empty
+                $("#myInput").on("keyup", function() {
+                    $(".filter-result").html("")
+                    if($('.movie:visible').length < 1) {
+                        $(".filter-result").append('<h3 style="text-align:center">No results found</h3>')
+                    }
+                });
             });
-        });
-
-    // Dropdown Filter
-        $('.filter').on('click', function () {
-            $(".filter-result").html("");
-            var filter_value = $(this).val();
-            $(".filter-result").append('<div class="row"><div class="col-md-5"><h4 style="color: black">Showing results for : '
-            + filter_value
-            + '</h4></div><div class="col-md-2 container"><button class="btn btn-light rmv"><i class="fas fa-times"></i> Remove Filter</button></div></div>');
-            $("#myDIV a").filter(function() {
-                $(this).toggle($(this).text().indexOf(filter_value) > -1)
-            });
-        });
-
-    //Remove Filter
-        $(document).on('click', '.rmv', function(){ //for dynamically created button
-            $(".filter-result").html("")
-            $("#myInput").val("")
-            $("#myDIV a").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf('') > -1)
-            });
-        });
-
-    });
     </script>
 </body>
 @endsection

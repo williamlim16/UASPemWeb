@@ -7,8 +7,7 @@
 
 <div class="row movie_card">
     <div class="info_section">
-        <div class="col-md-6 movie_header">
-
+        <div class="col-md-6 movie_header mb-3">
             <img class="thumbnail" src="/{{$movie->posterpath}}"/>
             <h1>{{ $movie->title}} </h1>
             <span class="minutes"> {{ $movie->time}}m</span>
@@ -22,29 +21,28 @@
         </div>
             <div class="movie_desc">
                 <p>
-                    {{ $movie->sypnosis}}
+                    {{ $movie->synopsis }}
                 </p>
              </div>
-        <div class="col-md-6">
+        <div class="col-md-6" style="margin-top:150px">
             <div class="row cast">
                 <div class="col-md-2">
                     <h4>Director</h4>
                     <div class="mt-3">
-                        <img src="/img/interstellar_cover.jpg" class="cast-icon">
+                        <img src="/img/default_profile.png" class="cast-icon">
                         <p>{{ $movie->director }}</p>
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <h4>Cast</h4>
                     <div class="row mt-3">
                         @foreach ($movie->casts as $cast)
-                        <div class="col-sm-6">
-                            <img src="/img/interstellar_cover.jpg" class="cast-icon">
+                        <div class="col-sm-3">
+                            <img src="/img/default_profile.png" class="cast-icon">
                         <p>{{ $cast }}</p>
                         </div>
                         @endforeach
-
                     </div>
                 </div>
 
