@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form action="/admin/movie/store" method="post">
+    <form action="/admin/movie/store" method="post" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="form-group">
@@ -34,10 +34,9 @@
             <input type="text" class="form-control" id="casts" name="casts" placeholder="e.g. Gordon Ramsay,Tom Hanks">
         </div>
         <div class="form-group">
-            <label for="posterpath">Poster path </label>
-            <input type="text" class="form-control" id="posterpath" name="posterpath" >
+            <label for="poster">Poster image</label>
+            <input type="file" name="poster">
         </div>
-
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

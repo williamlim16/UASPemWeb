@@ -21,6 +21,8 @@ Route::get('/admin/movie', ['uses'=>'AdminController@movie', 'as'=>'admin.movie'
 Route::get('/admin/movie/create', 'AdminController@movieCreate');
 Route::patch('/admin/movie/store', 'AdminController@movieInsert');
 Route::get('/admin/movie/edit/{mid}', 'AdminController@movieEdit');
+Route::get('/admin/movie/edit/poster/{mid}', 'AdminController@movieEditPoster');
+Route::patch('/admin/movie/edit/poster/{mid}', 'AdminController@movieEditPosterInsert');
 Route::post('/admin/movie/editdetail/{mid}', 'AdminController@movieUpdate');
 Route::get('/admin/movie/delete/{mid}', 'AdminController@movieDestroy');
 Route::get('/admin/movie/success', 'AdminController@movieSuccess');

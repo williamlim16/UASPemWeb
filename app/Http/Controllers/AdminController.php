@@ -41,7 +41,7 @@ class AdminController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    { 
+    {
         return view('admin.dashboard');
     }
     //=========================[[[MOVIE]]]=========================
@@ -69,6 +69,7 @@ class AdminController extends Controller
         }
         return view('admin.movie.index');
     }
+
     public function movieCreate(){
         return view('admin.movie.create');  
     }
@@ -79,7 +80,11 @@ class AdminController extends Controller
     public function movieInsert(Request $request){
         $movie = new Movie();
         $in = $request->only(['title', 'director', 'synopsis', 'time', 'age', 'categories', 'casts', 'posterpath']);
-
+        $file = $request->file('poster');
+        $filename = $in['title'].".".$file->getClientOriginalExtension();
+        $target = 'public/img';
+        $file->move($target,$filename);
+        $in['posterpath'] = 'public/img/'.$filename;
         $in['categories'] = '["'.str_replace(',', '","', str_replace(', ', ',', $in['categories'])).'"]';
         $in['casts'] = '["'.str_replace(',', '","', str_replace(', ', ',', $in['casts'])).'"]';
         $movie->insert($in);
@@ -106,6 +111,19 @@ class AdminController extends Controller
         $movie->casts = $casts;
         return view('admin.movie.edit', ['movie' => $movie]);
     }
+    public function movieEditPoster($id){
+        $movie = Movie::find($id);
+        return view('admin.movie.poster', ['movie' => $movie]);
+    }
+    public function movieEditPosterInsert(Request $req, $id){
+        $movie = Movie::find($id);
+        $file = $req->file('poster');
+        $filename = $movie['title'].".".$file->getClientOriginalExtension();
+        $target = 'public/img';
+        $file->move($target,$filename);
+        DB::table('movie')->where('id',$id)->update(['posterpath'=>"public/img/".$filename]);
+        return redirect('/admin/movie/success');
+    }
     public function movieDestroy($id){
         $movie = Movie::findOrfail($id);
         $movie->delete();
@@ -121,26 +139,26 @@ class AdminController extends Controller
             $data = DB::table('screening')
                     ->join('movie', 'screening.movie_id', '=', 'movie.id')
                     ->join('auditorium', 'screening.auditorium_id', '=', 'auditorium.id')
-                    ->select('screening.id as sId', 
-                        'screening.date as sDate', 
-                        'screening.time as sTime', 
+                    ->select('screening.id as sId',
+                        'screening.date as sDate',
+                        'screening.time as sTime',
 
                         'movie.id as mId',
-                        'movie.title as title', 
-                        'movie.posterpath as posterpath', 
-                        'movie.time as duration', 
-                        'movie.age as age', 
-                        'movie.categories as categories', 
+                        'movie.title as title',
+                        'movie.posterpath as posterpath',
+                        'movie.time as duration',
+                        'movie.age as age',
+                        'movie.categories as categories',
 
-                        'auditorium.id as aId', 
-                        'auditorium.name as aName', 
+                        'auditorium.id as aId',
+                        'auditorium.name as aName',
                         'auditorium.seats_no as seats')
                     ->get();
             for($i = 0; $i < count($data); $i++){
                 $data[$i]->categories = str_replace( array('[', ']', '"'),'',$data[$i]->categories);
                 $data[$i]->booked = DB::table('reservation')->selectRaw('count(*) as count')->where('screening_id', $data[$i]->sId)->groupBy('screening_id')->first();
             }
-            
+
 
             // $this->info($data);
             return Datatables::of($data)
@@ -164,7 +182,7 @@ class AdminController extends Controller
     public function screeningCreate(Request $request){
         $movies = Movie::all();
         $audi = Auditorium::all();
-        return view('admin.screening.create', ['movie' => $movies, 'audi' => $audi]);  
+        return view('admin.screening.create', ['movie' => $movies, 'audi' => $audi]);
     }
     public function screeningDetail($screeningId){
         $data = Screening::find($screeningId);
@@ -203,14 +221,14 @@ class AdminController extends Controller
             $data = DB::table('reservation')
                     ->join('users', 'reservation.user_id', '=', 'users.id')
                     ->join('seat', 'reservation.seat_id', '=', 'seat.id')
-                    ->select('reservation.screening_id as screeningId', 
-                        'reservation.seat_id as seatId', 
-                        'reservation.user_id as userId', 
+                    ->select('reservation.screening_id as screeningId',
+                        'reservation.seat_id as seatId',
+                        'reservation.user_id as userId',
                         'reservation.created_at as created_at',
 
                         'users.name as name',
                         'users.email as email',
-                        
+
                         DB::raw('CONCAT(seat.row," ",seat.number) as seat')
                         )
                     ->get();
@@ -274,7 +292,7 @@ class AdminController extends Controller
         $screening = Screening::where('id', $screening_id)
                         ->first();
         $seat = DB::table('seat')->where('id', $seat_id)
-                        ->first();     
+                        ->first();
         $users = DB::table('users')->get();
         $movie = DB::table('movie')->where('id', $screening->movie_id)->first();
         $audi = DB::table('auditorium')->where('id', $screening->auditorium_id)->first();
@@ -372,5 +390,5 @@ class AdminController extends Controller
 
     }
 
-    
+
 }
