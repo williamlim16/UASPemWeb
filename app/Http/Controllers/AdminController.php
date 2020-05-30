@@ -186,6 +186,7 @@ class AdminController extends Controller
         return view('admin.screening.edit', ['screening' => $screening, 'movie' => $movies, 'audi' => $audi]);
     }
     public function screeningDestroy($id){
+        $reserve = Reservation::where('screening_id', $id)->delete();
         $screening = Screening::findOrfail($id);
         $screening->delete();
         return redirect('/admin/screening/');
@@ -225,7 +226,6 @@ class AdminController extends Controller
                     ->make(true);
         }
     }
-
     public function ticketCreate(){
         $screening = DB::table('screening')
                     ->join('movie', 'movie.id', '=', 'screening.movie_id')
@@ -238,13 +238,11 @@ class AdminController extends Controller
                     'screening.time as time',
                     'screening.auditorium_id as aId',
                     'auditorium.name as aName')
-
                 ->get();
         $users = DB::table('users')->get();
 
         return view('admin.screening.createTicket', ['screenings' => $screening, 'users' => $users]);
     }
-
     public function ticketSeat(Request $request){
         $arr = explode(',', $request->id);
         $sId = $arr[0];//screening Id
@@ -260,27 +258,46 @@ class AdminController extends Controller
                 ->whereNotIn('id', $taken)
                 ->where('auditorium_id', '=', $aId)
                 ->get();
-                    
-
-
         return response()->json(['data' => $available]);
     }
-
-    public function ticketInsert(){
-
+    public function ticketInsert(Request $request){
+        $reservation = new Reservation();
+        $in = $request->only(['screening_id', 'seat_id', 'user_id']);
+        $reservation->insert($in);
+        // $reservation->save();
+        return redirect('/admin/screening/success');
     }
-
     public function ticketEdit($screening_id, $seat_id){
-
+        $curr = DB::table('reservation')->where('screening_id', '=', $screening_id)
+                        ->where('seat_id','=', $seat_id)->first();
+                        // ->get();
+        $screening = Screening::where('id', $screening_id)
+                        ->first();
+        $seat = DB::table('seat')->where('id', $seat_id)
+                        ->first();     
+        $users = DB::table('users')->get();
+        $movie = DB::table('movie')->where('id', $screening->movie_id)->first();
+        $audi = DB::table('auditorium')->where('id', $screening->auditorium_id)->first();
+        return view('admin.screening.editTicket',  ['screening' => $screening, 'users' => $users, 'seat'=>$seat, 'curr' => $curr, 'movie'=>$movie, 'audi'=>$audi]);
     }
-
     public function ticketDestroy($screening_id, $seat_id){
+        $reservation = Reservation::where('screening_id', $screening_id)
+            ->where('seat_id', $seat_id)
+            ->delete();
+        return redirect('/admin/screening/');
+    }
+    public function ticketUpdate(Request $request, $screening_id, $seat_id){
+        $reservation = Reservation::where('screening_id', $screening_id)->where('seat_id', $seat_id);
+        $in = $request->only(['user_id']);
 
+        $reservation->update($in);
+        // $reservation->save();
+        return redirect('/admin/screening/success');
     }
 
     //=========================[[[AUDITORIUM, ETC]]]=========================
     public function facility(){
-
+        return view('admin.facility.index');
     }
 
 

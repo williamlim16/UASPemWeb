@@ -37,6 +37,7 @@ Route::get('/admin/screening/ticket', ['uses'=>'AdminController@ticketTable', 'a
 Route::get('/admin/screening/ticket/create', 'AdminController@ticketCreate');
 Route::patch('/admin/screening/ticket/store', 'AdminController@ticketInsert');
 Route::get('/admin/screening/ticket/edit/{screening_id}/{seat_id}', 'AdminController@ticketEdit');
+Route::post('/admin/screening/ticket/update/{screening_id}/{seat_id}', 'AdminController@ticketUpdate');
 Route::get('/admin/screening/ticket/delete/{screening_id}/{seat_id}', 'AdminController@ticketDestroy');
 Route::post('/admin/screening/ticket/seats', ['uses' => 'AdminController@ticketSeat', 'as'=>'admin.checkseat']);
 

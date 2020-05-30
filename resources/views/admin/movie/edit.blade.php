@@ -2,6 +2,7 @@
 
 
 @section('content')
+<?php print_r($movie);?>
 <div class="container">
     <form action="/movie/{{$movie->id}}" method="post">
         @csrf
