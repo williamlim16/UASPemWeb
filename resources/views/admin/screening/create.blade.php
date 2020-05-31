@@ -4,9 +4,8 @@
 <div class="container">
     <div class="row justify-content-md-center">
         <div class="col-9">
-            <form action="/admin/screening/store" method="post">
+            <form action="{{route('screening.store')}}" method="post">
                 @csrf
-                @method('PATCH')
                 <div class="form-group">
                     <label for="movie_id">Movie to be shown :</label>
                     {{-- <input type="text" class="form-control" id="movie_id" name="movie_id" > --}}

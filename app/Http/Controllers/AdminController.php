@@ -348,15 +348,14 @@ class AdminController extends Controller
     {
         if ($request->ajax()) {
             $data = DB::table('auditorium')
-                ->leftJoin('screening', 'screening.auditorium_id', '=', 'auditorium.id')
-                ->select(array(
-                    'auditorium.id as id',
-                    'auditorium.name as name',
-                    'auditorium.seats_no as seats_no',
-                    DB::raw('count(screening.id) as use_count')
-                ))->groupBy(['auditorium.id', 'auditorium.name', 'auditorium.seats_no'])
-                ->get();
 
+                    ->leftJoin('screening', 'screening.auditorium_id', '=', 'auditorium.id')
+                    ->select(array('auditorium.id as id',
+                            'auditorium.name as name',
+                            'auditorium.seats_no as seats_no',
+                            DB::raw('count(screening.id) as use_count'))
+                    )->groupBy(['auditorium.id', 'auditorium.name', 'auditorium.seats_no'])
+                    ->get();
 
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -368,8 +367,6 @@ class AdminController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-
-
         return view('admin.facility.index');
     }
 

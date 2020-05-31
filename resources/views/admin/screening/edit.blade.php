@@ -4,7 +4,8 @@
 <div class="container">
     <div class="row justify-content-md-center">
         <div class="col-9">
-            <form action="/screening/{{$screening->id}}" method="post">
+            <form action="{{ route('screening.update',['screening'=>$screening->id]) }}" method="post">
+{{--                <form action="/screening/{{$screening->id}}" method="post">--}}
                 @csrf
                 @method('PATCH')
                 <div class="form-group">
