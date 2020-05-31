@@ -27,6 +27,7 @@ Route::post('/reserve/{sid}/store', 'ReserveController@store');
 Route::get('/reserve/{sid}/success/{seat}', 'ReserveController@success');
 Route::get('/history/{user}', 'HistoryController@index');
 
+Route::get('/sort/{by}', 'HomeController@sort')->name('home.sort');
 
 //Route::get('/admin/movie', ['uses' => 'AdminController@movie', 'as' => 'admin.movie']);
 //Route::get('/admin/movie/create', 'AdminController@movieCreate');
