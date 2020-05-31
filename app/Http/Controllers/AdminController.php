@@ -71,7 +71,7 @@ class AdminController extends Controller
     }
 
     public function movieCreate(){
-        return view('admin.movie.create');  
+        return view('admin.movie.create');
     }
     // public function movieDetail($movieId){
     //     $data = Movie::find($movieId);
@@ -82,9 +82,10 @@ class AdminController extends Controller
         $in = $request->only(['title', 'director', 'synopsis', 'time', 'age', 'categories', 'casts', 'posterpath']);
         $file = $request->file('poster');
         $filename = $in['title'].".".$file->getClientOriginalExtension();
-        $target = 'public/img';
+        $filename = str_replace(' ', '',$filename);
+        $target = 'movie/img';
         $file->move($target,$filename);
-        $in['posterpath'] = 'public/img/'.$filename;
+        $in['posterpath'] = 'movie/img/'.$filename;
         $in['categories'] = '["'.str_replace(',', '","', str_replace(', ', ',', $in['categories'])).'"]';
         $in['casts'] = '["'.str_replace(',', '","', str_replace(', ', ',', $in['casts'])).'"]';
         $movie->insert($in);
@@ -119,9 +120,9 @@ class AdminController extends Controller
         $movie = Movie::find($id);
         $file = $req->file('poster');
         $filename = $movie['title'].".".$file->getClientOriginalExtension();
-        $target = 'public/img';
+        $target = 'movie/img';
         $file->move($target,$filename);
-        DB::table('movie')->where('id',$id)->update(['posterpath'=>"public/img/".$filename]);
+        DB::table('movie')->where('id',$id)->update(['posterpath'=>"movie/img/".$filename]);
         return redirect('/admin/movie/success');
     }
     public function movieDestroy($id){
@@ -324,8 +325,8 @@ class AdminController extends Controller
                             DB::raw('count(screening.id) as use_count'))
                     )->groupBy(['auditorium.id', 'auditorium.name', 'auditorium.seats_no'])
                     ->get();
-            
-            
+
+
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -356,7 +357,7 @@ class AdminController extends Controller
         $id = $id->id;
         $row = $request->only('row')['row'];
         $count = $request->only('seats_no')['seats_no'];
-        
+
         $char = 'A';
         $data = array();
         $curr = 1;
@@ -388,6 +389,10 @@ class AdminController extends Controller
     //=========================[[[STATISTIC]]]=========================
     public function statistics(){
 
+    }
+
+    public function success(){
+        return view('admin.success');
     }
 
 

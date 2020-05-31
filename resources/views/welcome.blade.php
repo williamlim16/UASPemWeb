@@ -4,29 +4,28 @@
 <head>
     <link href="{{ asset('css/search.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
+<div class="container">
 
     <div id="carousel" class="carousel slide" data-ride="carousel">
 
         <div class="carousel-inner">
             @foreach($movies as $movie)
-            @if($loop->index==0)<div class="carousel-item active">
-            @else<div class="carousel-item">
-            @endif
-                <img src="{{$movie->posterpath}}" alt="{{Str::substr($movie->posterpath, 4)}}" class="d-block w-100">
-            </div>
-            @endforeach
+                @if($loop->index==0)<div class="carousel-item active">
+                    @else<div class="carousel-item">
+                        @endif
+                        <img src="{{$movie->posterpath}}" alt="{{Str::substr($movie->posterpath, 4)}}" class="d-block w-100">
+                    </div>
+                    @endforeach
+                </div>
+                <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
         </div>
-        <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
     </div>
 
     {{-- Search --}}
@@ -47,11 +46,11 @@
                         Sort By
                     </a>
 
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a href="{{ route('home.sort', 'alphabetical') }}" class="dropdown-item sort">Alphabetical</a>
-                        <a href="{{ route('home.sort', 'latest') }}" class="dropdown-item sort">Latest</a>
-                        <a href="{{ route('home.sort', 'oldest') }}" class="dropdown-item sort">Oldest</a>
-                    </div>
+{{--                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">--}}
+{{--                        <a href="{{ route('home.sort', 'alphabetical') }}" class="dropdown-item sort">Alphabetical</a>--}}
+{{--                        <a href="{{ route('home.sort', 'latest') }}" class="dropdown-item sort">Latest</a>--}}
+{{--                        <a href="{{ route('home.sort', 'oldest') }}" class="dropdown-item sort">Oldest</a>--}}
+{{--                    </div>--}}
                 </div>
             </div>
 
@@ -91,7 +90,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         @foreach($movies as $movie)
                             @foreach ($movie->categories as $genre)
-                    <button class="dropdown-item filter" value="{{ $genre }}">{{ $genre }}</button>
+                                <button class="dropdown-item filter" value="{{ $genre }}">{{ $genre }}</button>
                             @endforeach
                         @endforeach
                     </div>
@@ -106,105 +105,104 @@
         <h3>Sort by: {{ ucfirst($sort_type) }}</h3>
         <div class="filter-result"></div>
         <div class="row">
-        @foreach($movies as $movie)
-        <a href="/movie/{{ $movie->id }}" id="{{ $movie->title }}">
-            <div class="col-4 mt-4">
-                    <div class="movie">
-                        <div class="menu"><i class="material-icons"></i></div>
-                        <div class="movie-img" style="background-image: url('{{ $movie->posterpath }}');"></div>
+            @foreach($movies as $movie)
+                <a href="/movie/{{ $movie->id }}" id="{{ $movie->title }}">
+                    <div class="col-4 mt-4">
+                        <div class="movie">
+                            <div class="menu"><i class="material-icons"></i></div>
+                            <div class="movie-img" style="background-image: url('{{ $movie->posterpath }}');"></div>
                             <div class="text-movie-cont">
                                 <div class="mr-grid">
                                     <div class="col1">
-                                    <h1>{{ $movie->title }}</h1>
-                                    <ul class="movie-gen">
-                                        <li>PG- {{ $movie->age }}  /</li>
-                                        <li> {{ intval(($movie->time)/60) }}h{{ intval(($movie->time)%60) }}m /</li>
-                                        <p hidden>{{ intval(($movie->time)/60) >= 2 ? "> 2 hours" : "< 2 hours"}}</p>
-                                        <li>
-                                            @foreach($movie->categories as $genre)
-                                                @if($loop->index == 0){{$genre}}
-                                                @else{{", ".$genre." "}}
-                                                @endif
-                                            @endforeach
-                                        </li>
-                                    </ul>
+                                        <h1>{{ $movie->title }}</h1>
+                                        <ul class="movie-gen">
+                                            <li>PG- {{ $movie->age }}  /</li>
+                                            <li> {{ intval(($movie->time)/60) }}h{{ intval(($movie->time)%60) }}m /</li>
+                                            <p hidden>{{ intval(($movie->time)/60) >= 2 ? "> 2 hours" : "< 2 hours"}}</p>
+                                            <li>
+                                                @foreach($movie->categories as $genre)
+                                                    @if($loop->index == 0){{$genre}}
+                                                    @else{{", ".$genre." "}}
+                                                    @endif
+                                                @endforeach
+                                            </li>
+                                        </ul>
                                     </div>
 
                                 </div>
                             </div>
-                        <div class="mr-grid">
-                            <div class="col1">
-                            <p class="movie-description">{{ $movie->sypnosis }}</p>
-                            </div>
-                        <div>
-                            <div class="mr-grid actors-row ml-4">
+                            <div class="mr-grid">
                                 <div class="col1">
-                                <p class="movie-actors">
-                                    @foreach($movie->casts as $actor)
-                                        @if($loop->index == 0){{$actor}}
-                                        @else{{", ".$actor}}
-                                        @endif
-                                    @endforeach
-                                </p>
+                                    <p class="movie-description">{{ $movie->sypnosis }}</p>
                                 </div>
-                            </div>
-                            <div class="mr-grid actors-row ml-3 synopsis">
-                                {{$movie->synopsis}}
+                                <div>
+                                    <div class="mr-grid actors-row ml-4">
+                                        <div class="col1">
+                                            <p class="movie-actors">
+                                                @foreach($movie->casts as $actor)
+                                                    @if($loop->index == 0){{$actor}}
+                                                    @else{{", ".$actor}}
+                                                    @endif
+                                                @endforeach
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="mr-grid actors-row ml-3 synopsis">
+                                        {{$movie->synopsis}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </a>
-        @endforeach
+                </a>
+            @endforeach
         </div>
     </div>
-        <script>
-            $(document).ready(function(){
+    <script>
+        $(document).ready(function(){
             // Search bar
-                $("#myInput").on("keyup", function() {
-                    var value = $(this).val().toLowerCase();
-                    $("#myDIV a").filter(function() {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                    });
-                });
-
-            // Dropdown Filter
-                $('.filter').on('click', function () {
-                    $(".filter-result").html("");
-                    var filter_value = $(this).val();
-                    $(".filter-result").append('<h4 style="color: black">Showing results for: '
-                    + filter_value
-                    + '</h4><button class="btn btn-light rmv"><i class="fas fa-times"></i> Remove Filter</button>');
-                    $("#myDIV a").filter(function() {
-                        $(this).toggle($(this).text().indexOf(filter_value) > -1)
-                    });
-                });
-
-            //Remove Filter
-                $(document).on('click', '.rmv', function(){ //for dynamically created button
-                    $(".filter-result").html("")
-                    $("#myInput").val("")
-                    $("#myDIV a").filter(function() {
-                        $(this).toggle($(this).text().toLowerCase().indexOf('') > -1)
-                    });
-                });
-
-            //Animate scroll
-                $(".filter").click(function() {
-                    $('html,body').animate({
-                        scrollTop: $("#myDIV").offset().top},
-                        'slow');
-                });
-
-            //if search result is empty
-                $("#myInput").on("keyup", function() {
-                    $(".filter-result").html("")
-                    if($('.movie:visible').length < 1) {
-                        $(".filter-result").append('<h3 style="text-align:center">No results found</h3>')
-                    }
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myDIV a").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
             });
+
+            // Dropdown Filter
+            $('.filter').on('click', function () {
+                $(".filter-result").html("");
+                var filter_value = $(this).val();
+                $(".filter-result").append('<h4 style="color: black">Showing results for: '
+                    + filter_value
+                    + '</h4><button class="btn btn-light rmv"><i class="fas fa-times"></i> Remove Filter</button>');
+                $("#myDIV a").filter(function() {
+                    $(this).toggle($(this).text().indexOf(filter_value) > -1)
+                });
+            });
+
+            //Remove Filter
+            $(document).on('click', '.rmv', function(){ //for dynamically created button
+                $(".filter-result").html("")
+                $("#myInput").val("")
+                $("#myDIV a").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf('') > -1)
+                });
+            });
+
+            //Animate scroll
+            $(".filter").click(function() {
+                $('html,body').animate({
+                        scrollTop: $("#myDIV").offset().top},
+                    'slow');
+            });
+
+            //if search result is empty
+            $("#myInput").on("keyup", function() {
+                $(".filter-result").html("")
+                if($('.movie:visible').length < 1) {
+                    $(".filter-result").append('<h3 style="text-align:center">No results found</h3>')
+                }
+            });
+        });
     </script>
-</body>
 @endsection

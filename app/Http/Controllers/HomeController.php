@@ -37,18 +37,18 @@ class HomeController extends Controller
         ]);
     }
 
-    public function sort($sort)
-    {
-        if ($sort == 'latest') {
-            $movies = Movie::orderBy('id', 'desc')->get();
-        } else if ($sort == 'alphabetical') {
-            $movies = Movie::orderBy('title')->get();
-        } else {
-            $movies = Movie::orderBy('id', 'asc')->get();
-        }
-        return view('welcome', [
-            'movies' => $movies,
-            'sort_type' => $sort
-        ]);
-    }
+//    public function sort($sort)
+//    {
+//        if ($sort == 'latest') {
+//            $movies = Movie::orderBy('id', 'desc')->get();
+//        } else if ($sort == 'alphabetical') {
+//            $movies = Movie::orderBy('title')->get();
+//        } else {
+//            $movies = Movie::orderBy('id', 'asc')->get();
+//        }
+//        return view('welcome', [
+//            'movies' => $movies,
+//            'sort_type' => $sort
+//        ]);
+//    }
 }

@@ -1,9 +1,9 @@
 .search {
-    @import url('https://fonts.googleapis.com/css?family=Sarabun');
+    //@import url('https://fonts.googleapis.com/css?family=Sarabun');
 
-    *,
-    *::after,
-    *::before {
+    &,
+    &::after,
+    &::before {
         margin: 0;
         padding: 0;
         box-sizing: inherit;
@@ -36,7 +36,7 @@
         border: none;
         outline: none;
         border-radius: 10rem;
-        box-shadow: 0 1rem 2rem rgba(black, .1);
+        box-shadow: 0 1rem 2rem rgba(#000000, .1);
         padding: 2rem;
         transition: all .2s;
         transition-delay: .1s;

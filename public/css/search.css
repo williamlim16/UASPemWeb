@@ -1,27 +1,32 @@
-@import url(https://fonts.googleapis.com/css?family=Sarabun);.search {
+.search {
   width: 25rem;
   height: 100%;
   margin: 0 1rem;
   position: relative;
 }
-.search *,
-.search *::after,
-.search *::before {
+
+.search,
+.search::after,
+.search::before {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
 }
+
 .search html {
   font-size: 62.5%;
 }
+
 .search body {
   box-sizing: border-box;
   background-color: rgba(229, 229, 229, 0.3);
   font-family: "Sarabun", sans-serif;
 }
+
 .search h1 {
   margin: 2rem;
 }
+
 .search .search-bar {
   font-size: 2.4rem;
   width: 67rem;
@@ -34,10 +39,13 @@
   transition: all 0.2s;
   transition-delay: 0.1s;
 }
+
 .search .search-bar:placeholder-shown {
   opacity: 0.5;
 }
+
 .search .search-button {
   margin-top: 30px;
   margin-left: 700px;
 }
+

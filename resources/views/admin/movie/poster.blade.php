@@ -4,9 +4,8 @@
 @section('content')
     <div class="container">
         <img src="/{{$movie->posterpath}}">
-        <form action="/admin/movie/edit/poster/{{$movie->id}}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('poster',['id'=> $movie->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('PATCH')
             <div class="row">
                 <input type="file" name="poster" class="mt-2">
             </div>
