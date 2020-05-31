@@ -15,10 +15,9 @@ class ScreeningController extends Controller
 
     public function index()
     {
-      
     }
 
-   
+
     public function update(Request $request, $id)
     {
         $screening = Screening::find($id);
@@ -28,5 +27,4 @@ class ScreeningController extends Controller
         return redirect('/admin/screening/success');
     }
 
-    
 }

@@ -53,8 +53,7 @@
         <div class="mt-3">
             <h4>Watch Trailer</h4> <br>
                 <iframe width="560" height="315"
-                {{-- src="{{ $movie->youtubelink }}" --}}
-                src="https://www.youtube.com/embed/fTRnWXXDcL4"
+                src="{{ $movie->trailer }}"
                 frameborder="0" allow="accelerometer; autoplay;
                 encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
             </iframe>

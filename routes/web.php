@@ -5,18 +5,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 
 Auth::routes();
-Route::prefix('admin')->group(function (){
+Route::prefix('admin')->group(function () {
     Route::get('movies/poster/{id}', 'MovieController@posterEdit')->name('poster');
     Route::post('movies/poster/{id}', 'MovieController@posterStore');
     Route::resource('movies', 'MovieController');
-    Route::resource('screening', 'ScreeningController');
+    // Route::resource('screening', 'ScreeningController');
     Route::resource('auditorium', 'AuditoriumController');
 });
 
 Route::get('admin/success', 'AdminController@success');
 
 Route::get('/home', 'HomeController@index')->name('home');
-//Route::get('/{sort}', 'HomeController@sort')->name('home.sort')->middleware();
+Route::get('/movie/{id}', 'HomeController@show')->name('movie.show'); //to show movie details to user
+
+
 Route::get('/admin', 'AdminController@index');
 
 
@@ -24,6 +26,7 @@ Route::get('/reserve/{sid}', 'ReserveController@index');
 Route::post('/reserve/{sid}/store', 'ReserveController@store');
 Route::get('/reserve/{sid}/success/{seat}', 'ReserveController@success');
 
+Route::get('/sort/{by}', 'HomeController@sort')->name('home.sort');
 
 
 //Route::get('/admin/movie', ['uses' => 'AdminController@movie', 'as' => 'admin.movie']);
@@ -34,9 +37,10 @@ Route::get('/reserve/{sid}/success/{seat}', 'ReserveController@success');
 //Route::patch('/admin/movie/edit/poster/{mid}', 'AdminController@movieEditPosterInsert');
 //Route::post('/admin/movie/editdetail/{mid}', 'AdminController@movieUpdate');
 //Route::get('/admin/movie/delete/{mid}', 'AdminController@movieDestroy');
+
 //Route::get('/admin/movie/success', 'AdminController@movieSuccess');
 
-Route::get('/admin/screening', ['uses' => 'AdminController@screening', 'as' => 'admin.screening']);
+Route::get('/admin/screening', 'AdminController@screening')->name('admin.screening');
 Route::get('/admin/screening/create', 'AdminController@screeningCreate');
 Route::patch('/admin/screening/store', 'AdminController@screeningInsert');
 Route::get('/admin/screening/edit/{sid}', 'AdminController@screeningEdit');

@@ -22,7 +22,14 @@
         </div>
         <div class="form-group">
             <label for="age">Age Rating:</label>
-            <input type="number" class="form-control" id="age" name="age">
+            {{-- <input type="number" class="form-control" id="age" name="age"> --}}
+            <select class="form-control form-control-md" id="age" name="age">
+                <option value="G">General Audiences (G)</option>
+                <option value="PG">Parental Guidance Suggested (PG)</option>
+                <option value="PG-13">Parents Strongly Cautioned (PG-13)</option>
+                <option value="R">Restricted (R)</option>
+                <option value="NC-17">Adults Only (NC-17)</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="categories">Categories (separates with commas):</label>
