@@ -20,6 +20,7 @@ class ScreeningController extends Controller
 
     public function index(Request $request)
     {
+
         if ($request->ajax()) {
             $data = DB::table('screening')
                 ->join('movie', 'screening.movie_id', '=', 'movie.id')
@@ -67,6 +68,7 @@ class ScreeningController extends Controller
         }
         // $a = DB::table('reservation')->selectRaw('count(*)')->groupBy('screening_id')->get();
         return view('admin.screening.index');
+
     }
 
 

@@ -33,22 +33,30 @@ class HomeController extends Controller
 
         return view('welcome', [
             'movies' => $movies,
+            // 'categories' => $categories,
             'sort_type' => 'Latest'
         ]);
     }
 
-//    public function sort($sort)
-//    {
-//        if ($sort == 'latest') {
-//            $movies = Movie::orderBy('id', 'desc')->get();
-//        } else if ($sort == 'alphabetical') {
-//            $movies = Movie::orderBy('title')->get();
-//        } else {
-//            $movies = Movie::orderBy('id', 'asc')->get();
-//        }
-//        return view('welcome', [
-//            'movies' => $movies,
-//            'sort_type' => $sort
-//        ]);
-//    }
+    public function sort($by)
+    {
+        if ($by == 'oldest') {
+            $movies = Movie::orderBy('id', 'asc')->get();
+        } else if ($by == 'alphabetical') {
+            $movies = Movie::orderBy('title')->get();
+        } else {
+            $movies = Movie::orderBy('id', 'desc')->get();
+        }
+
+        return view('welcome', [
+            'movies' => $movies,
+            'sort_type' => $by
+        ]);
+    }
+
+    public function show($id) //show movie details to users, the show($id) function in MovieController is for admin.
+    {
+        $movie = Movie::find($id);
+        return view('movie.show', ['movie' => $movie]);
+    }
 }

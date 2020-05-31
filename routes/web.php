@@ -20,12 +20,21 @@ Route::prefix('admin')->group(function () {
 Route::get('admin/success', 'AdminController@success');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/movie/{id}', 'HomeController@show')->name('movie.show'); //to show movie details to user
+
 Route::get('/admin', 'AdminController@index');
 
 Route::get('/reserve/{sid}', 'ReserveController@index');
 Route::post('/reserve/{sid}/store', 'ReserveController@store');
 Route::get('/reserve/{sid}/success/{seat}', 'ReserveController@success');
+
 //Route::get('/{sort}', 'HomeController@sort')->name('home.sort')->middleware();
+
+
+Route::get('/history/{user}', 'HistoryController@index');
+
+Route::get('/sort/{by}', 'HomeController@sort')->name('home.sort');
 
 
 //Route::get('/admin/movie', ['uses' => 'AdminController@movie', 'as' => 'admin.movie']);
@@ -36,6 +45,7 @@ Route::get('/reserve/{sid}/success/{seat}', 'ReserveController@success');
 //Route::patch('/admin/movie/edit/poster/{mid}', 'AdminController@movieEditPosterInsert');
 //Route::post('/admin/movie/editdetail/{mid}', 'AdminController@movieUpdate');
 //Route::get('/admin/movie/delete/{mid}', 'AdminController@movieDestroy');
+
 //Route::get('/admin/movie/success', 'AdminController@movieSuccess');
 
 //Route::get('/admin/screening', ['uses' => 'AdminController@screening', 'as' => 'admin.screening']);
@@ -54,11 +64,11 @@ Route::get('/reserve/{sid}/success/{seat}', 'ReserveController@success');
 //Route::get('/admin/screening/ticket/delete/{screening_id}/{seat_id}', 'AdminController@ticketDestroy');
 //Route::post('/admin/screening/ticket/seats', ['uses' => 'AdminController@ticketSeat', 'as' => 'admin.checkseat']);
 
+
 //Route::get('/admin/facility', ['uses' => 'AdminController@facility', 'as' => 'admin.facility']);
 //Route::get('/admin/facility/create', 'AdminController@facilityCreate');
 //Route::patch('/admin/facility/store', 'AdminController@facilityInsert');
 //Route::get('/admin/facility/delete/{sid}', 'AdminController@facilityDestroy');
 //Route::get('/admin/facility/success', 'AdminController@facilitySuccess');
-
 
 Route::get('/admin/statistics', 'AdminController@statistics');
