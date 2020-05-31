@@ -15,10 +15,9 @@ class MovieController extends Controller
     {
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-            if(!Gate::allows('admin-access')){ //not authorized as admin, declared in AuthServiceProvider.php
+            if (!Gate::allows('admin-access')) { //not authorized as admin, declared in AuthServiceProvider.php
                 abort(403, 'Unauthorized action.');
-            }
-            else{
+            } else {
                 return $next($request);
             }
         });
@@ -38,10 +37,10 @@ class MovieController extends Controller
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="/admin/movies/' . $row->id . '/edit" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editItem">Edit</a>';
                     $btn = $btn . '<form action="/admin/movies/' . $row->id . '"method="POST">
-<input type="hidden" name="_method" value="DELETE">
-<input type="hidden" name="_token" value="{{ csrf_token() }}">
-<input type="submit" value="Delete" class="btn btn-danger">
-</form>';
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="submit" value="Delete" class="btn btn-danger">
+                    </form>';
                     return $btn;
                 })
                 ->addColumn('thumbnail', function ($row) {
@@ -128,24 +127,27 @@ class MovieController extends Controller
         return view('admin.movie.edit', ['movie' => $movie]);
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $movie = Movie::findOrfail($id);
         $movie->delete();
         return redirect('/admin/success');
     }
 
-    public function posterEdit($id){
+    public function posterEdit($id)
+    {
         $movie = Movie::find($id);
         return view('admin.movie.poster', ['movie' => $movie]);
     }
 
-    public function posterStore(Request $request,$id){
+    public function posterStore(Request $request, $id)
+    {
         $movie = Movie::find($id);
         $file = $request->file('poster');
-        $filename = $movie['title'].".".$file->getClientOriginalExtension();
+        $filename = $movie['title'] . "." . $file->getClientOriginalExtension();
         $target = 'movie/img';
-        $file->move($target,$filename);
-        DB::table('movie')->where('id',$id)->update(['posterpath'=>"movie/img/".$filename]);
+        $file->move($target, $filename);
+        DB::table('movie')->where('id', $id)->update(['posterpath' => "movie/img/" . $filename]);
         return redirect('/admin/success');
     }
 }
