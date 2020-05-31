@@ -9,7 +9,7 @@ Route::prefix('admin')->group(function (){
     Route::get('movies/poster/{id}', 'MovieController@posterEdit')->name('poster');
     Route::post('movies/poster/{id}', 'MovieController@posterStore');
     Route::resource('movies', 'MovieController');
-    Route::resource('screening', 'ScreeningController');
+    // Route::resource('screening', 'ScreeningController');
     Route::resource('auditorium', 'AuditoriumController');
 });
 
@@ -23,7 +23,7 @@ Route::get('/admin', 'AdminController@index');
 Route::get('/reserve/{sid}', 'ReserveController@index');
 Route::post('/reserve/{sid}/store', 'ReserveController@store');
 Route::get('/reserve/{sid}/success/{seat}', 'ReserveController@success');
-
+Route::get('/history/{user}', 'HistoryController@index');
 
 
 //Route::get('/admin/movie', ['uses' => 'AdminController@movie', 'as' => 'admin.movie']);
