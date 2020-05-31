@@ -268,7 +268,7 @@ class AdminController extends Controller
         $aId = $arr[1];//audi Id
 
 
-        $taken =  Reservation::where('screening_id', '=', $sId)->pluck('seat_id')->toArray();
+        $taken =  DB::table('reservation')->where('screening_id', '=', $sId)->pluck('seat_id')->toArray();
 
         $available = DB::table('seat')
                 ->select('id',
@@ -325,8 +325,6 @@ class AdminController extends Controller
                             DB::raw('count(screening.id) as use_count'))
                     )->groupBy(['auditorium.id', 'auditorium.name', 'auditorium.seats_no'])
                     ->get();
-
-
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -337,8 +335,6 @@ class AdminController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-
-
         return view('admin.facility.index');
     }
 

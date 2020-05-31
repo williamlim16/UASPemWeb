@@ -13,9 +13,10 @@
 <div class="container">
     <div class="row justify-content-md-center">
         <div class="col-9">
-            <form action="/admin/screening/ticket/update/{{$curr->screening_id}}/{{$curr->seat_id}}" method="post">
+{{--            <form action="/admin/screening/ticket/update/{{$curr->screening_id}}/{{$curr->seat_id}}" method="post">--}}
+                <form action="{{route('tickets.update',['screening_id'=>$curr->screening_id,'seat_id'=>$curr->seat_id])}}" method="post">
                 @csrf
-                @method('POST')
+                @method('PATCH')
                 <div class="form-group">
                     <label for="screening">Screening :</label>
                     <input type="text" value="{{"[".$curr->screening_id."] Showing: ".$movie->title." @ ".$screening->date.", ".$screening->time.". Auditorium: ".$audi->name}}" class="form-control" readonly>
@@ -25,7 +26,7 @@
                     <input type="text" value="{{ $seat->row." ".$seat->number}}" class="form-control ml-2" readonly>
 
                 </div>
-                
+
                 <div class="form-group">
                     <label for="user_id">On behalf of ? <label>
                     <select id="user_id" name="user_id" class="custom-select">
