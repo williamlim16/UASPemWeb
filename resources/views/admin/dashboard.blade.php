@@ -10,7 +10,7 @@
                 <div class="card-body">
                   <h3 class="card-title" >Manage Movie List</h3>
                   <p class="card-text">Create, Read, Update, and Delete movie entries</p>
-                  <a href="/admin/movie" class="btn btn-primary">Go ></a>
+                  <a href="{{route('movies.index')}}" class="btn btn-primary">Go ></a>
                 </div>
               </div>
             </div>
@@ -30,7 +30,7 @@
                     <div class="card-body">
                         <h3 class="card-title">Manage Facility</h3>
                         <p class="card-text">Manage auditoriums and other facility</p>
-                        <a href="/admin/facility" class="btn btn-primary">Go ></a>
+                        <a href="{{route('auditorium.index')}}" class="btn btn-primary">Go ></a>
                     </div>
                 </div>
             </div>

@@ -71,7 +71,7 @@ class AdminController extends Controller
     }
 
     public function movieCreate(){
-        return view('admin.movie.create');  
+        return view('admin.movie.create');
     }
     // public function movieDetail($movieId){
     //     $data = Movie::find($movieId);
@@ -325,8 +325,8 @@ class AdminController extends Controller
                             DB::raw('count(screening.id) as use_count'))
                     )->groupBy(['auditorium.id', 'auditorium.name', 'auditorium.seats_no'])
                     ->get();
-            
-            
+
+
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -357,7 +357,7 @@ class AdminController extends Controller
         $id = $id->id;
         $row = $request->only('row')['row'];
         $count = $request->only('seats_no')['seats_no'];
-        
+
         $char = 'A';
         $data = array();
         $curr = 1;
@@ -389,6 +389,10 @@ class AdminController extends Controller
     //=========================[[[STATISTIC]]]=========================
     public function statistics(){
 
+    }
+
+    public function success(){
+        return view('admin.success');
     }
 
 

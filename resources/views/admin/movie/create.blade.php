@@ -2,9 +2,8 @@
 
 @section('content')
 <div class="container">
-    <form action="/admin/movie/store" method="post" enctype="multipart/form-data">
+    <form action="{{ route('movies.store') }}" method="post" enctype="multipart/form-data">
         @csrf
-        @method('PATCH')
         <div class="form-group">
             <label for="title">Title :</label>
             <input type="text" class="form-control" id="title" name="title" >
