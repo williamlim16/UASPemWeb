@@ -38,59 +38,61 @@
     {{-- Search --}}
 
     {{-- Filter --}}
-    <div class="container mt-4 offset-2">
-        <div class="row">
-            <div class="col-sm-1">
-                <div class="dropdown show">
-                    <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sort By
-                    </a>
-                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                       <a href="{{ route('home.sort', 'alphabetical') }}" class="dropdown-item sort">Alphabetical</a>
-                       <a href="{{ route('home.sort', 'latest') }}" class="dropdown-item sort">Latest</a>
-                       <a href="{{ route('home.sort', 'oldest') }}" class="dropdown-item sort">Oldest</a>
-                   </div>
-                </div>
-            </div>
-
-            <div class="col-sm-1 mr-4">
-                <div class="dropdown show">
-                    <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Age Rating
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <button class="dropdown-item filter" value="G_fltr">G</button>
-                        <button class="dropdown-item filter" value="PG_fltr">PG</button>
-                        <button class="dropdown-item filter" value="PG-13_fltr">PG-13</button>
-                        <button class="dropdown-item filter" value="R_fltr">R</button>
-                        <button class="dropdown-item filter" value="NC-17_fltr">NC-17</button>
+    <div class="container">
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-sm-1">
+                    <div class="dropdown show">
+                        <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sort By
+                        </a>
+                       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                           <a href="{{ route('home.sort', 'alphabetical') }}" class="dropdown-item sort">Alphabetical</a>
+                           <a href="{{ route('home.sort', 'latest') }}" class="dropdown-item sort">Latest</a>
+                           <a href="{{ route('home.sort', 'oldest') }}" class="dropdown-item sort">Oldest</a>
+                       </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-sm-1 mr-2">
-                <div class="dropdown show">
-                    <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Duration
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <button class="dropdown-item filter" value="> 2 hours"> > 2 hours</button>
-                        <button class="dropdown-item filter" value="< 2 hours"> < 2 hours</button>
+                <div class="col-sm-1 mr-4">
+                    <div class="dropdown show">
+                        <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Age Rating
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <button class="dropdown-item filter" value="G_fltr">G</button>
+                            <button class="dropdown-item filter" value="PG_fltr">PG</button>
+                            <button class="dropdown-item filter" value="PG-13_fltr">PG-13</button>
+                            <button class="dropdown-item filter" value="R_fltr">R</button>
+                            <button class="dropdown-item filter" value="NC-17_fltr">NC-17</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-sm-1 mr-4">
-                <div class="dropdown show">
-                    <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Genre
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        @foreach ($movies as $movie)
-                            @foreach ($movie->categories as $genre)
-                                <button class="dropdown-item filter" value="{{ $genre }}">{{ $genre }}</button>
+                <div class="col-sm-1 mr-2">
+                    <div class="dropdown show">
+                        <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Duration
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <button class="dropdown-item filter" value="> 2 hours"> > 2 hours</button>
+                            <button class="dropdown-item filter" value="< 2 hours"> < 2 hours</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-1 mr-4">
+                    <div class="dropdown show">
+                        <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Genre
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            @foreach ($movies as $movie)
+                                @foreach ($movie->categories as $genre)
+                                    <button class="dropdown-item filter" value="{{ $genre }}">{{ $genre }}</button>
+                                @endforeach
                             @endforeach
-                        @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
