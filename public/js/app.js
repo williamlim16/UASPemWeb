@@ -1976,6 +1976,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["seats", "screeningid", "userid"],
   data: function data() {
@@ -2028,7 +2030,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   console.log(err);
                 })["finally"](function () {
                   // $target = ''.concat('/reserve/', $this.screeningid, '/success?s=', JSON.parse(JSON.stringify(this.send.seat)).toString().replace(/,/g, '+'));
-                  window.location.href = "/reserve/".concat(_this.screeningid, "/success/").concat(JSON.stringify(_this.send.seat).replace(/,/g, '+').replace(/\[|\]/g, ''));
+                  window.location.href = "/reserve/".concat(_this.screeningid, "/success/").concat(JSON.stringify(_this.send.seat).replace(/,/g, "+").replace(/\[|\]/g, ""));
                 });
 
               case 4:
@@ -47818,7 +47820,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nh1[data-v-3bd99d8c],\nh5[data-v-3bd99d8c] {\n    color: black;\n}\n.container[data-v-3bd99d8c] {\n    height: 100vh;\n}\n", ""]);
+exports.push([module.i, "\nh1[data-v-3bd99d8c],\nh5[data-v-3bd99d8c] {\n  color: black;\n}\n.container[data-v-3bd99d8c] {\n  height: 100vh;\n}\n", ""]);
 
 // exports
 
@@ -80948,7 +80950,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container " }, [
+  return _c("div", { staticClass: "container" }, [
     _vm._m(0),
     _vm._v(" "),
     _vm._m(1),
@@ -80964,7 +80966,7 @@ var render = function() {
                   "button",
                   {
                     key: index,
-                    staticClass: "btn m-2 ",
+                    staticClass: "btn m-2",
                     class: _vm.buttonClasses(seat),
                     attrs: { disabled: !seat.available },
                     on: {
@@ -80973,15 +80975,7 @@ var render = function() {
                       }
                     }
                   },
-                  [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(seat.id) +
-                        " - " +
-                        _vm._s(seat.row) +
-                        "\n            "
-                    )
-                  ]
+                  [_vm._v(_vm._s(seat.id) + " - " + _vm._s(seat.row))]
                 )
               : _vm._e()
           ]
@@ -81010,15 +81004,7 @@ var render = function() {
                       }
                     }
                   },
-                  [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(seat.id) +
-                        " - " +
-                        _vm._s(seat.row) +
-                        "\n            "
-                    )
-                  ]
+                  [_vm._v(_vm._s(seat.id) + " - " + _vm._s(seat.row))]
                 )
               : _vm._e()
           ]
@@ -81061,7 +81047,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "col m-5" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-body text-center" }, [
-            _vm._v("\n                    SCREEN\n                ")
+            _vm._v("SCREEN")
           ])
         ])
       ])
@@ -93449,7 +93435,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\nSassError: expected \")\".\n    ╷\n162 │     https://fonts.googleapis.com/css?family=Open+Sans:400,\r\n    │          ^\n    ╵\n  C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\resources\\sass\\movie-card.scss 162:10  root stylesheet\n    at runLoaders (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\webpack\\lib\\NormalModule.js:316:20)\n    at C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\loader-runner\\lib\\LoaderRunner.js:233:18\n    at context.callback (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\loader-runner\\lib\\LoaderRunner.js:111:13)\n    at render (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass-loader\\dist\\index.js:73:7)\n    at Function.call$2 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:87584:16)\n    at _render_closure1.call$2 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:77359:12)\n    at _RootZone.runBinary$3$3 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:25587:18)\n    at _RootZone.runBinary$3 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:25591:19)\n    at _FutureListener.handleError$1 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:24041:19)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:24337:40)\n    at Object._Future__propagateToListeners (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:3497:88)\n    at _Future._completeError$2 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:24165:9)\n    at _AsyncAwaitCompleter.completeError$2 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:23557:12)\n    at Object._asyncRethrow (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:3253:17)\n    at C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:13333:20\n    at _wrapJsFunctionForAsync_closure.$protected (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:3276:15)\n    at _wrapJsFunctionForAsync_closure.call$2 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:23578:12)\n    at _awaitOnObject_closure0.call$2 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:23570:25)\n    at _RootZone.runBinary$3$3 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:25587:18)\n    at _RootZone.runBinary$3 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:25591:19)\n    at _FutureListener.handleError$1 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:24041:19)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:24337:40)\n    at Object._Future__propagateToListeners (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:3497:88)\n    at _Future._completeError$2 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:24165:9)\n    at _Future__asyncCompleteError_closure.call$0 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:24260:18)\n    at Object._microtaskLoop (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:3547:21)\n    at StaticClosure._startMicrotaskLoop (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:3553:11)\n    at _AsyncRun__scheduleImmediateJsOverride_internalCallback.call$0 (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:23475:21)\n    at invokeClosure (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:1360:26)\n    at Immediate.<anonymous> (C:\\Users\\Michael\\Documents\\Bioscoop_Pemweb\\UASPemweb\\node_modules\\sass\\sass.dart.js:1381:18)\n    at runCallback (timers.js:705:18)\n    at tryOnImmediate (timers.js:676:5)\n    at processImmediate (timers.js:658:5)");
 
 /***/ }),
 
@@ -93471,11 +93457,11 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! A:\Tugas\UAS\PemWeb\uas\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! A:\Tugas\UAS\PemWeb\uas\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! A:\Tugas\UAS\PemWeb\uas\resources\sass\movie-card.scss */"./resources/sass/movie-card.scss");
-__webpack_require__(/*! A:\Tugas\UAS\PemWeb\uas\resources\sass\details.scss */"./resources/sass/details.scss");
-module.exports = __webpack_require__(/*! A:\Tugas\UAS\PemWeb\uas\resources\sass\search.scss */"./resources/sass/search.scss");
+__webpack_require__(/*! C:\Users\Michael\Documents\Bioscoop_Pemweb\UASPemweb\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\Michael\Documents\Bioscoop_Pemweb\UASPemweb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Michael\Documents\Bioscoop_Pemweb\UASPemweb\resources\sass\movie-card.scss */"./resources/sass/movie-card.scss");
+__webpack_require__(/*! C:\Users\Michael\Documents\Bioscoop_Pemweb\UASPemweb\resources\sass\details.scss */"./resources/sass/details.scss");
+module.exports = __webpack_require__(/*! C:\Users\Michael\Documents\Bioscoop_Pemweb\UASPemweb\resources\sass\search.scss */"./resources/sass/search.scss");
 
 
 /***/ })

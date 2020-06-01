@@ -28,6 +28,7 @@ class ScreeningController extends Controller
 
     public function index(Request $request)
     {
+
         if ($request->ajax()) {
             $data = DB::table('screening')
                 ->join('movie', 'screening.movie_id', '=', 'movie.id')
@@ -59,10 +60,10 @@ class ScreeningController extends Controller
                 ->addColumn('action', function($row){
                     $btn = '<a href="/admin/screening/'.$row->sId.'/edit" data-toggle="tooltip"  data-id="'.$row->sId.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editItem">Edit</a>';
                     $btn = $btn.'<form action="/admin/screening/' . $row->sId . '"method="POST">
-<input type="hidden" name="_method" value="DELETE">
-<input type="hidden" name="_token" value="{{ csrf_token() }}">
-<input type="submit" value="Delete" class="btn btn-danger">
-</form>';
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="submit" value="Delete" class="btn btn-danger">
+                    </form>';
                     return $btn;
                 })
                 // ->addColumn('thumbnail', function($row){
@@ -75,6 +76,7 @@ class ScreeningController extends Controller
         }
         // $a = DB::table('reservation')->selectRaw('count(*)')->groupBy('screening_id')->get();
         return view('admin.screening.index');
+
     }
 
 

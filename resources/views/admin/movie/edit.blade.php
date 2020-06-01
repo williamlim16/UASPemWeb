@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="container">
-        <form action="{{route('movies.update',['movie'=>$movie->id])}}" method="post">
+        <form action="{{route('movies.update',['movie'=>$movie->id])}}" method="POST">
             @csrf
             @method('PATCH')
             <div class="form-group">
@@ -24,7 +24,13 @@
             </div>
             <div class="form-group">
                 <label for="age">Age Rating:</label>
-                <input type="number" class="form-control" id="age" name="age" value="{{$movie->age}}">
+                <select class="form-control form-control-md" id="age" name="age">
+                    <option value="G">General Audiences (G)</option>
+                    <option value="PG">Parental Guidance Suggested (PG)</option>
+                    <option value="PG-13">Parents Strongly Cautioned (PG-13)</option>
+                    <option value="R">Restricted (R)</option>
+                    <option value="NC-17">Adults Only (NC-17)</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="categories">Categories (separates with commas):</label>
@@ -36,9 +42,14 @@
                 <input type="text" class="form-control" id="casts" name="casts" value="{{$movie->casts}}">
             </div>
             <div class="form-group">
-                <label for="posterpath">Poster path </label>
+                <label for="posterpath">Poster Path </label>
                 <input type="text" class="form-control" id="posterpath" name="posterpath"
                        value="{{$movie->posterpath}}">
+            </div>
+            <div class="form-group">
+                <label for="trailer">Trailer Embed Link</label>
+                <input type="text" class="form-control" id="trailer" name="trailer"
+                       value="{{$movie->trailer}}">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

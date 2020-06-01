@@ -1,6 +1,7 @@
-<?php
+<?php //Namespace declaration statement has to be the very first statement in the script
 
 namespace App\Http\Controllers;
+
 use Response;
 
 
@@ -15,6 +16,8 @@ use App\Movie;
 use App\Screening;
 use App\Auditorium;
 use App\Reservation;
+use App\Charts\TicketChart;
+
 
 class AdminController extends Controller
 {
@@ -27,10 +30,9 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            if(!Gate::allows('admin-access')){ //not authorized as admin, declared in AuthServiceProvider.php
+            if (!Gate::allows('admin-access')) { //not authorized as admin, declared in AuthServiceProvider.php
                 abort(403, 'Unauthorized action.');
-            }
-            else{
+            } else {
                 return $next($request);
             }
         });
@@ -44,6 +46,7 @@ class AdminController extends Controller
     {
         return view('admin.dashboard');
     }
+
 //    //=========================[[[MOVIE]]]=========================
 //    public function movie(Request $request){
 //        if ($request->ajax()) {
@@ -382,14 +385,83 @@ class AdminController extends Controller
 //        return view('admin.facility.success');
 //    }
 
+
     //=========================[[[STATISTIC]]]=========================
     public function statistics(){
+        $queryByDate = DB::table('reservation')->select('created_at as time', DB::raw("COUNT(*) as num"))->groupBy('created_at')->orderBy('created_at')->get();
+        $labelByDate = array();
+        $dataByDate = array();
+        for($i = 0; $i < count($queryByDate);$i++){
+            $labelByDate[] = $queryByDate[$i]->time;
+            $dataByDate[] = $queryByDate[$i]->num;
+        }
 
+        $queryByMovie = DB::table('reservation')
+                    ->join('screening', 'screening.id', '=', 'reservation.screening_id')
+                    ->join('movie', 'movie.id', '=', 'screening.movie_id')
+                    ->select('movie.title as title', DB::raw("COUNT(*) as num"))->groupBy('movie.title')->orderBy('movie.title')->get();
+        $labelByMovie = array();
+        $dataByMovie = array();
+        for($i = 0; $i < count($queryByMovie);$i++){
+            $labelByMovie[] = $queryByMovie[$i]->title;
+            $dataByMovie[] = $queryByMovie[$i]->num;
+        }
+
+        $chart = array();
+
+        //chart colors
+        $borderColors = [
+            "rgba(255, 99, 132, 1.0)",
+            "rgba(22,160,133, 1.0)",
+            "rgba(255, 205, 86, 1.0)",
+            "rgba(51,105,232, 1.0)",
+            "rgba(244,67,54, 1.0)",
+            "rgba(34,198,246, 1.0)",
+            "rgba(153, 102, 255, 1.0)",
+            "rgba(255, 159, 64, 1.0)",
+            "rgba(233,30,99, 1.0)",
+            "rgba(205,220,57, 1.0)"
+        ];
+        $fillColors = [
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(22,160,133, 0.2)",
+            "rgba(255, 205, 86, 0.2)",
+            "rgba(51,105,232, 0.2)",
+            "rgba(244,67,54, 0.2)",
+            "rgba(34,198,246, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+            "rgba(233,30,99, 0.2)",
+            "rgba(205,220,57, 0.2)"
+
+        ];
+
+        //charts
+        $byDate = new TicketChart;
+        $byDate->labels($labelByDate);
+        $byDate->dataset('Ticket sale by time', 'line', $dataByDate)
+            ->color("rgb(255, 99, 132)")
+            ->backgroundcolor("rgb(255, 99, 132)")
+            ->linetension(0)
+            ->fill(false);
+        $byDate->title('Ticket Sale by Time', 30);
+        $byDate->displayLegend(false);
+        $chart[] = $byDate;
+
+        $byMovie = new TicketChart;
+        $byMovie->labels($labelByMovie);
+        $byMovie->dataset('Sale by Movie Title', 'bar', $dataByMovie)
+                ->color($borderColors)
+                ->backgroundcolor($fillColors);
+        $byMovie->title('Ticket Sale by Movie Title', 30);
+        $byMovie->displayLegend(false);
+        $chart[] = $byMovie;
+
+        return view('admin.ticketStatistic', ['chart' => $chart] );
     }
 
-    public function success(){
+    public function success()
+    {
         return view('admin.success');
     }
-
-
 }
