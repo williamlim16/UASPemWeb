@@ -57,34 +57,41 @@ class HomeController extends Controller
     public function show($id)
     {
         $movie = Movie::find($id);
-        $screening = DB::table('screening')->where('movie_id', $id)->pluck('id');
-        $counter = count($screening);
+        $screening_id = DB::table('screening')->where('movie_id', $id)->pluck('id');
         $screening_room = DB::table('screening')->where('movie_id', $id)->pluck('auditorium_id');
-        if(!$screening->isEmpty()) {
+        $screening_time = DB::table('screening')->where('movie_id', $id)->orderBy('time', 'asc')->pluck('time');
+        $counter = count($screening_id);
+        if(!$screening_id->isEmpty()) {
             $i = 0;
             while(true) {
                 $seat = DB::table('auditorium')->where('id', $screening_room[$i])->value('seats_no');
-                $count_tickets = DB::table('reservation')->where('screening_id', $screening[$i])->count();
+                $count_tickets = DB::table('reservation')->where('screening_id', $screening_id[$i])->count();
                 if($count_tickets >= $seat) {
                     $i++;
                     if($i >= $counter) {
-                        $screening = '';
+                        $screening_id = '';
                         break;
                     }
                     continue;
                 } else if($count_tickets < $seat) {
-                    $screening = $screening[$i];
+                    $screening_id = $screening_id[$i];
                     break;
                 }
             }
 
-        } else if($screening->isEmpty()) {
-            $screening = '';
+        } else if($screening_id->isEmpty()) {
+            $screening_id = '';
         }
 
         return view('movie.show', [
             'movie' => $movie,
-            'screening' => $screening
+            'screening' => $screening_id,
+            'screening_time' => $screening_time
         ]);
+    }
+
+    public function reserve($time) {
+        $screening_id = DB::table('screening')->where('time', $time)->value('id');
+        return redirect()->route('reserve.index', $screening_id);
     }
 }

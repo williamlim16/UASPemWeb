@@ -39,6 +39,7 @@ Route::patch('/profile/{id}','ProfileController@update')->name('profile.update')
 Route::get('/history/{user}', 'HistoryController@index');
 
 Route::get('/sort/{by}', 'HomeController@sort')->name('home.sort');
+Route::get('/home/{time}', 'HomeController@reserve')->name('home.reserve');
 
 
 

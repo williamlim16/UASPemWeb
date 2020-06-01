@@ -58,30 +58,17 @@
             </iframe>
         </div>
 
-        {{-- <div class="col-md-6 mt-3">
-            <h4>Pick your time</h4>
+        <div class="col-md-6 mt-3">
+            <h4>Pick your time & Choose seats</h4>
             <div class="row">
-                <div class="col-sm-3">
-                    <button class="btn btn-2">10:00</button>
-                </div>
-                <div class="col-sm-3">
-                    <button class="btn btn-2">12:00</button>
-
-                </div>
-                <div class="col-sm-3">
-                    <button class="btn btn-2">13:00</button>
-
-                </div>
-                <div class="col-sm-3">
-                    <button class="btn btn-2">14:00</button>
-                </div>
-            </div>
-        </div> --}}
-        <div class="row">
-            <div class="col-md-2 mt-5">
-                <a href="{{ route('reserve.index', $screening)}}" class="btn btn-light btn-lg btn-block reserve-button" {{ ($screening != '') ? "" : "hidden" }}>RESERVE</a>
+                @foreach($screening_time as $time)
+                    <div class="col-sm-4">
+                        <a href="{{route('home.reserve', $time)}}" class="btn btn-2" value="{{$time}}">{{date("h:i a", strtotime($time))}}</a>
+                    </div>
+                @endforeach
             </div>
         </div>
+        <h2 style="color:white">{{ ($screening != '') ? "" : "No seat available!" }}</h2>
     </div>
     <div class="blur_back" style="background-image: url('/{{ $movie->posterpath }}')"></div>
 </div>
