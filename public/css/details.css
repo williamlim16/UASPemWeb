@@ -237,3 +237,13 @@ body {
   border-radius: 100%;
 }
 
+a.btn-dark {
+  text-decoration: none;
+  margin-left: 35px;
+}
+
+.reserve-button {
+  text-decoration: none;
+  color: black;
+}
+
