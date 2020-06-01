@@ -113,7 +113,7 @@
                             <div class="text-movie-cont">
                                 <div class="mr-grid">
                                     <div class="col1">
-                                        <h1>{{ $movie->title }}</h1>
+                                        <h2 class="text-left">{{ $movie->title }}</h2>
                                         <ul class="movie-gen">
                                             <li>{{ $movie->age }} /</li>
                                             <p hidden>{{$movie->age}}_fltr</p>
