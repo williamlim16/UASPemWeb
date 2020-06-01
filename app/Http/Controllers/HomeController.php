@@ -59,7 +59,7 @@ class HomeController extends Controller
         $movie = Movie::find($id);
         $screening_id = DB::table('screening')->where('movie_id', $id)->pluck('id');
         $screening_room = DB::table('screening')->where('movie_id', $id)->pluck('auditorium_id');
-        $screening_time = DB::table('screening')->where('movie_id', $id)->pluck('time');
+        $screening_time = DB::table('screening')->where('movie_id', $id)->orderBy('time', 'asc')->pluck('time');
         $counter = count($screening_id);
         if(!$screening_id->isEmpty()) {
             $i = 0;
