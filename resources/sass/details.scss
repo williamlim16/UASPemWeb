@@ -273,16 +273,24 @@ body {
 }
 
 .cast {
-
     p {
         color: white;
         word-wrap: break-word;
     }
-
 }
 
 .cast-icon {
     width: 50px;
     height: 50px;
     border-radius: 100%;
+}
+
+a.btn-dark {
+    text-decoration: none;
+    margin-left: 35px;
+}
+
+.reserve-button {
+    text-decoration: none;
+    color: black;
 }

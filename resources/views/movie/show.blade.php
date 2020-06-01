@@ -5,6 +5,7 @@
     <link href="{{ asset('css/details.css') }}" rel="stylesheet">
 </head>
 
+<a href="/home" class="btn-lg btn-dark">< Back</a>
 <div class="row movie_card">
     <div class="info_section">
         <div class="col-md-6 movie_header mb-3">
@@ -34,7 +35,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <h4>Cast</h4>
                     <div class="row mt-3">
                         @foreach ($movie->casts as $cast)
@@ -45,8 +46,6 @@
                         @endforeach
                     </div>
                 </div>
-
-                <div class="col-md-7"></div>
             </div>
         </div>
 
@@ -59,7 +58,7 @@
             </iframe>
         </div>
 
-        <div class="col-md-6 mt-3">
+        {{-- <div class="col-md-6 mt-3">
             <h4>Pick your time</h4>
             <div class="row">
                 <div class="col-sm-3">
@@ -77,29 +76,14 @@
                     <button class="btn btn-2">14:00</button>
                 </div>
             </div>
-        </div>
-
-        <a href="/home"><button class="btn btn-secondary">Go Back</button></a>
+        </div> --}}
         <div class="row">
-            <div class="col-md-2">
-                <form action="" method="POST">
-                @csrf
-                <input type="submit" name="reserve-btn" id="submit" class="btn-lg btn-primary" value="Reserve">
-                </form>
+            <div class="col-md-2 mt-5">
+            <a href="/reserve/{{ $movie->id }}" class="btn btn-light btn-lg btn-block reserve-button">RESERVE</a>
             </div>
-            <!--DELETE NYA DI CRUD LAIN, JANGAN DISINI-->
-            {{-- <div class="col-md-2">
-                <form action="" method="POST">
-                @csrf
-                @method('DELETE')
-                <input type="submit" name="delete-btn" id="submit" class="btn-lg btn-danger" value="Delete">
-                </form>
-            </div> --}}
-            <!--DELETE NYA DI CRUD LAIN, JANGAN DISINI-->
         </div>
     </div>
-    <div class="blur_back" style="background-image: url('/img/inception_details.jpg')"></div>
-    {{-- <div class="blur_back" style="background-image: url('/{{ $movie->posterpath }}')"></div> --}}
+    <div class="blur_back" style="background-image: url('/{{ $movie->posterpath }}')"></div>
 
 </div>
 @endsection
