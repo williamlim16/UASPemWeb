@@ -58,7 +58,7 @@
             </iframe>
         </div>
 
-        <div class="col-md-6 mt-3">
+        <div class="col-md-6 mt-3" {{ ($screening != '') ? "" : "hidden" }}>
             <h4>Pick your time & Choose seats</h4>
             <div class="row">
                 @foreach($screening_time as $time)
@@ -68,8 +68,19 @@
                 @endforeach
             </div>
         </div>
-        <h2 style="color:white">{{ ($screening != '') ? "" : "No seat available!" }}</h2>
+        <h2 style="color:white">{{ ($screening != '') ? "" : "No seats available!" }}</h2>
     </div>
     <div class="blur_back" style="background-image: url('/{{ $movie->posterpath }}')"></div>
 </div>
+<script>
+    //Remove duplicate screening time
+    var seen = {};
+    $('.btn-2').each(function() {
+        var txt = $(this).text();
+        if (seen[txt])
+            $(this).remove();
+        else
+            seen[txt] = true;
+    });
+</script>
 @endsection
