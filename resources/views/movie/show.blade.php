@@ -27,20 +27,20 @@
              </div>
         <div class="col-md-6" style="margin-top:150px">
             <div class="row cast">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <h4>Director</h4>
-                    <div class="mt-3">
-                        <img src="/img/default_profile.png" class="cast-icon">
+                    <div class="mt-3 cast-icon mr-3">
+                        <img src="/img/default_profile.png">
                         <p>{{ $movie->director }}</p>
                     </div>
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <h4>Cast</h4>
                     <div class="row mt-3">
                         @foreach ($movie->casts as $cast)
-                        <div class="col-sm-3">
-                            <img src="/img/default_profile.png" class="cast-icon">
+                        <div class="col-sm-3 cast-icon">
+                            <img src="/img/default_profile.png">
                         <p>{{ $cast }}</p>
                         </div>
                         @endforeach
