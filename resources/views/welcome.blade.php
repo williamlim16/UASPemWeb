@@ -105,7 +105,7 @@
         <div class="filter-result"></div>
         <div class="row">
             @foreach($movies as $movie)
-                <a href="{{ route('movie.show', $movie->id)}}" id="{{ $movie->title }}" class="movie-title">
+                <a href="{{ route('movie.show', $movie->id)}}" id="{{ $movie->title }}" class="movie-title text-decoration-none">
                     <div class="col-4 mt-4">
                         <div class="movie">
                             <div class="menu"><i class="material-icons"></i></div>
