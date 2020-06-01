@@ -8,14 +8,22 @@ use App\Reservation;
 use Illuminate\Http\Request;
 use App\Screening;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
 
 class ScreeningController extends Controller
 {
-
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if(!Gate::allows('admin-access')){ //not authorized as admin, declared in AuthServiceProvider.php
+                abort(403, 'Unauthorized action.');
+            }
+            else{
+                return $next($request);
+            }
+        });
     }
 
     public function index(Request $request)

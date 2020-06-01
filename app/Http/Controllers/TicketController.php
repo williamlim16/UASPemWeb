@@ -6,10 +6,24 @@ use App\Reservation;
 use App\Screening;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
 
 class TicketController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if(!Gate::allows('admin-access')){ //not authorized as admin, declared in AuthServiceProvider.php
+                abort(403, 'Unauthorized action.');
+            }
+            else{
+                return $next($request);
+            }
+        });
+    }
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -68,7 +82,7 @@ class TicketController extends Controller
         $reservation = new Reservation();
         $in = $request->only(['screening_id', 'seat_id', 'user_id']);
         $reservation->insert($in);
-        return redirect('/admin/screening/success');
+        return redirect('/admin/success');
     }
 
     public function destroy($screening_id, $seat_id)
@@ -101,7 +115,7 @@ class TicketController extends Controller
 
         $reservation->update($in);
         // $reservation->save();
-        return redirect('/admin/screening/success');
+        return redirect('/admin/success');
     }
 
     public function seats(Request $request)
