@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="container">
-        <form action="{{route('movies.update',['movie'=>$movie->id])}}" method="post">
+        <form action="{{route('movies.update',['movie'=>$movie->id])}}" method="POST">
             @csrf
             @method('PATCH')
             <div class="form-group">
@@ -42,9 +42,14 @@
                 <input type="text" class="form-control" id="casts" name="casts" value="{{$movie->casts}}">
             </div>
             <div class="form-group">
-                <label for="posterpath">Poster path </label>
+                <label for="posterpath">Poster Path </label>
                 <input type="text" class="form-control" id="posterpath" name="posterpath"
                        value="{{$movie->posterpath}}">
+            </div>
+            <div class="form-group">
+                <label for="trailer">Trailer Embed Link</label>
+                <input type="text" class="form-control" id="trailer" name="trailer"
+                       value="{{$movie->trailer}}">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

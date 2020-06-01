@@ -93,7 +93,7 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         $movie = new Movie();
-        $in = $request->only(['title', 'director', 'synopsis', 'time', 'age', 'categories', 'casts', 'posterpath']);
+        $in = $request->only(['title', 'director', 'synopsis', 'time', 'age', 'categories', 'casts', 'posterpath', 'trailer']);
         $file = $request->file('poster');
         $filename = $in['title'] . "." . $file->getClientOriginalExtension();
         $filename = str_replace(' ', '', $filename);

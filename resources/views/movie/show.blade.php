@@ -11,7 +11,7 @@
         <div class="col-md-6 movie_header mb-3">
             <img class="thumbnail" src="/{{$movie->posterpath}}"/>
             <h1>{{ $movie->title}} </h1>
-            <span class="minutes"> {{ $movie->time}}m</span>
+            <span class="minutes"> {{ intval(($movie->time)/60) }}h{{ intval(($movie->time)%60) }}m </span>
             <p class="type">
                 @foreach($movie->categories as $genre)
                     @if($loop->index == 0){{$genre}}
