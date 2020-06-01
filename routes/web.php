@@ -35,6 +35,7 @@ Route::get('/reserve/{sid}/success/{seat}', 'ReserveController@success');
 Route::get('/history/{user}', 'HistoryController@index');
 
 Route::get('/sort/{by}', 'HomeController@sort')->name('home.sort');
+Route::get('/home/{time}', 'HomeController@reserve')->name('home.reserve');
 
 
 
