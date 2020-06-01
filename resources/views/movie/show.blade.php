@@ -84,6 +84,5 @@
         </div>
     </div>
     <div class="blur_back" style="background-image: url('/{{ $movie->posterpath }}')"></div>
-
 </div>
 @endsection
