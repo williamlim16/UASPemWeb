@@ -47820,7 +47820,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nh1[data-v-3bd99d8c],\nh5[data-v-3bd99d8c] {\n  color: black;\n}\n.container[data-v-3bd99d8c] {\n  height: 100vh;\n}\n", ""]);
+exports.push([module.i, "\nh1[data-v-3bd99d8c],\r\nh5[data-v-3bd99d8c] {\r\n  color: black;\n}\n.container[data-v-3bd99d8c] {\r\n  height: 100vh;\n}\r\n", ""]);
 
 // exports
 
