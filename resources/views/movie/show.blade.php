@@ -79,7 +79,7 @@
         </div> --}}
         <div class="row">
             <div class="col-md-2 mt-5">
-            <a href="/reserve/{{ $movie->id }}" class="btn btn-light btn-lg btn-block reserve-button">RESERVE</a>
+                <a href="{{ route('reserve.index', $screening)}}" class="btn btn-light btn-lg btn-block reserve-button" {{ ($screening != '') ? "" : "hidden" }}>RESERVE</a>
             </div>
         </div>
     </div>

@@ -8,7 +8,6 @@
 <div class="container">
 
     <div id="carousel" class="carousel slide" data-ride="carousel">
-
         <div class="carousel-inner">
             @foreach($movies as $movie)
                 @if($loop->index==0)<div class="carousel-item active">
