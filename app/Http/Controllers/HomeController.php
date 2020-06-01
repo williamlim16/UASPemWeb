@@ -57,6 +57,16 @@ class HomeController extends Controller
     public function show($id) //show movie details to users, the show($id) function in MovieController is for admin.
     {
         $movie = Movie::find($id);
-        return view('movie.show', ['movie' => $movie]);
+        $screening = DB::table('screening')->where('movie_id', $id)->value('id');
+        // $screening = DB::table('screening')->where('movie_id', $id)->pluck('id'); //array
+
+        if($screening == '') {
+            $screening = '';
+        }
+
+        return view('movie.show', [
+            'movie' => $movie,
+            'screening' => $screening
+        ]);
     }
 }

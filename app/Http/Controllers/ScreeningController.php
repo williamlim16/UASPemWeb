@@ -52,10 +52,10 @@ class ScreeningController extends Controller
                 ->addColumn('action', function($row){
                     $btn = '<a href="/admin/screening/'.$row->sId.'/edit" data-toggle="tooltip"  data-id="'.$row->sId.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editItem">Edit</a>';
                     $btn = $btn.'<form action="/admin/screening/' . $row->sId . '"method="POST">
-<input type="hidden" name="_method" value="DELETE">
-<input type="hidden" name="_token" value="{{ csrf_token() }}">
-<input type="submit" value="Delete" class="btn btn-danger">
-</form>';
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="submit" value="Delete" class="btn btn-danger">
+                    </form>';
                     return $btn;
                 })
                 // ->addColumn('thumbnail', function($row){

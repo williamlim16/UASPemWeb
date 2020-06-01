@@ -25,7 +25,7 @@ Route::get('/movie/{id}', 'HomeController@show')->name('movie.show'); //to show 
 
 Route::get('/admin', 'AdminController@index');
 
-Route::get('/reserve/{sid}', 'ReserveController@index');
+Route::get('/reserve/{sid}', 'ReserveController@index')->name('reserve.index');
 Route::post('/reserve/{sid}/store', 'ReserveController@store');
 Route::get('/reserve/{sid}/success/{seat}', 'ReserveController@success');
 
@@ -35,6 +35,8 @@ Route::get('/reserve/{sid}/success/{seat}', 'ReserveController@success');
 Route::get('/history/{user}', 'HistoryController@index');
 
 Route::get('/sort/{by}', 'HomeController@sort')->name('home.sort');
+
+
 
 
 //Route::get('/admin/movie', ['uses' => 'AdminController@movie', 'as' => 'admin.movie']);
