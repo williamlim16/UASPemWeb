@@ -93232,6 +93232,7 @@ module.exports = function(module) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/esm/index.js");
+/* harmony import */ var _components_ReserveComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/ReserveComponent.vue */ "./resources/js/components/ReserveComponent.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -93252,8 +93253,12 @@ Vue.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
  */
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+// Vue.component(
+//     "reserve-component",
+//     require("./components/ReserveComponent.vue").default
+// );
 
-Vue.component("reserve-component", __webpack_require__(/*! ./components/ReserveComponent.vue */ "./resources/js/components/ReserveComponent.vue")["default"]);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -93261,7 +93266,10 @@ Vue.component("reserve-component", __webpack_require__(/*! ./components/ReserveC
  */
 
 var app = new Vue({
-  el: "#app"
+  el: "#app",
+  components: {
+    ReserveComponent: _components_ReserveComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }
 });
 
 /***/ }),

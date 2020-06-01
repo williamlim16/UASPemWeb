@@ -8,9 +8,7 @@ Auth::routes();
 Route::prefix('admin')->group(function () {
     Route::get('movies/poster/{id}', 'MovieController@posterEdit')->name('poster');
     Route::post('movies/poster/{id}', 'MovieController@posterStore');
-    Route::resource('movies', 'MovieController');
-    Route::resource('auditorium', 'AuditoriumController');
-    Route::resource('screening', 'ScreeningController');
+    Route::resources(['movies' => 'MovieController', 'auditorium' => 'AuditoriumController', 'screening' => 'ScreeningController']);
     Route::resource('tickets', 'TicketController')->except(['edit', 'update', 'delete']);
     Route::get('tickets/edit/{screening_id}/{seat_id}', 'TicketController@edit')->name('tickets.edit');
     Route::patch('tickets/edit/{screening_id}/{seat_id}', 'TicketController@update')->name('tickets.update');
@@ -28,6 +26,12 @@ Route::get('/admin', 'AdminController@index');
 Route::get('/reserve/{sid}', 'ReserveController@index')->name('reserve.index');
 Route::post('/reserve/{sid}/store', 'ReserveController@store');
 Route::get('/reserve/{sid}/success/{seat}', 'ReserveController@success');
+
+
+Route::get('/profile/{id}/edit','ProfileController@index')->name('profile.edit');
+Route::get('/profile/{id}/pict','ProfileController@editPict')->name('profile.pict');
+Route::post('/profile/{id}/pict','ProfileController@updatePict')->name('profile.pictUp');
+Route::patch('/profile/{id}','ProfileController@update')->name('profile.update');
 
 //Route::get('/{sort}', 'HomeController@sort')->name('home.sort')->middleware();
 
