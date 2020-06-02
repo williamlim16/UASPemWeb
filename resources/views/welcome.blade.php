@@ -133,22 +133,19 @@
                                 </div>
                             </div>
                             <div class="mr-grid">
-                                    <p class="movie-description">{{ $movie->sypnosis }}</p>
-                                <div>
-                                    <div class="mr-grid actors-row ml-4">
-                                        <div class="col1">
-                                            <p class="movie-actors">
-                                                @foreach($movie->casts as $actor)
-                                                    @if($loop->index == 0){{$actor}}
-                                                    @else{{", ".$actor}}
-                                                    @endif
-                                                @endforeach
-                                            </p>
-                                        </div>
+                                <div class="mr-grid actors-row ml-4">
+                                    <div class="col1">
+                                        <p class="movie-actors">
+                                            @foreach($movie->casts as $actor)
+                                                @if($loop->index == 0){{$actor}}
+                                                @else{{", ".$actor}}
+                                                @endif
+                                            @endforeach
+                                        </p>
                                     </div>
-                                    <div class="mr-grid actors-row ml-3 synopsis">
-                                        {{$movie->synopsis}}
-                                    </div>
+                                </div>
+                                <div class="mr-grid actors-row ml-3 synopsis">
+                                    {{$movie->synopsis}}
                                 </div>
                             </div>
                         </div>
